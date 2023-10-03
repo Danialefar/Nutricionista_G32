@@ -8,26 +8,29 @@ public class Paciente {
     private String nombre_paciente;
     private int dni_paciente;
     private String direccion_paciente;
-    private int telef_paciente;
+    private String telef_paciente;
+    private boolean estado;
 
     public Paciente() {
     }
 
-    public Paciente(int id_paciente, String apellido_paciente, String nombre_paciente, int dni_paciente, String direccion_paciente, int telef_paciente) {
+    public Paciente(int id_paciente, String apellido_paciente, String nombre_paciente, int dni_paciente, String direccion_paciente, String telef_paciente, boolean estado) {
         this.id_paciente = id_paciente;
         this.apellido_paciente = apellido_paciente;
         this.nombre_paciente = nombre_paciente;
         this.dni_paciente = dni_paciente;
         this.direccion_paciente = direccion_paciente;
         this.telef_paciente = telef_paciente;
+        this.estado = estado;
     }
 
-    public Paciente(String apellido_paciente, String nombre_paciente, int dni_paciente, String direccion_paciente, int telef_paciente) {
+    public Paciente(String apellido_paciente, String nombre_paciente, int dni_paciente, String direccion_paciente, String telef_paciente, boolean estado) {
         this.apellido_paciente = apellido_paciente;
         this.nombre_paciente = nombre_paciente;
         this.dni_paciente = dni_paciente;
         this.direccion_paciente = direccion_paciente;
         this.telef_paciente = telef_paciente;
+        this.estado = estado;
     }
 
     public int getId_paciente() {
@@ -70,13 +73,23 @@ public class Paciente {
         this.direccion_paciente = direccion_paciente;
     }
 
-    public int getTelef_paciente() {
+    public String getTelef_paciente() {
         return telef_paciente;
     }
 
-    public void setTelef_paciente(int telef_paciente) {
+    public void setTelef_paciente(String telef_paciente) {
         this.telef_paciente = telef_paciente;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    
 
     @Override
     public String toString() {
