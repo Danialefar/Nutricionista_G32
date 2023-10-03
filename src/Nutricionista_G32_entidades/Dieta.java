@@ -90,7 +90,6 @@ public class Dieta {
     public void setFecha_final(LocalDate fecha_final) {
         this.fecha_final = fecha_final;
     }
-    
-    
-    
+
+            
 }
