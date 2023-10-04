@@ -20,13 +20,15 @@ public class Nutricionista_G32 {
 //        pD.buscarPacientePorDni(33254110);
 //        pD.modificarPaciente(p1);
 
-        Comida d1 = new Comida("DESAYUNO 1", "INFUSION CON EDULCORANTE + 2 RODAJAS DE PAN LACTAL CON MERMELADA O QUESO", 70, true);
-        Comida d2 = new Comida(2,"DESAYUNO 2", "YOGURT DESCREMADO CON 2 CUCHARADAS DE AVENA Y 1 DE PASAS DE CEREALES + 1 FRUTA", 80, true);
+        Comida d1 = new Comida(1, "INFUSION + FRUTA", "INFUSION CON EDULCORANTE + 2 RODAJAS DE PAN LACTAL CON MERMELADA O QUESO", 70, true);
+        Comida d2 = new Comida(2, "YOGUT CON CEREAL", "YOGURT DESCREMADO CON 2 CUCHARADAS DE AVENA Y 1 DE PASAS DE CEREALES + 1 FRUTA", 80, true);
         Comida_Data cD = new Comida_Data();
 
 //        cD.guardarComida(d2);
-//        cD.modificarComida(d2);
-          cD.bajaComida(2);
+//        cD.modificarComida(d1);
+//        cD.bajaComida(2);
+
+
     }
 
 }
