@@ -84,6 +84,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Comida");
 
         jMenuItem3.setText("MenuComida");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("ListaComida");
@@ -129,6 +134,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         escritorio.add(mp);
         escritorio.moveToFront(mp);
     }//GEN-LAST:event_jMenuPacienteActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        MenuComida mc= new MenuComida();
+        mc.setVisible(true);
+        escritorio.add(mc);
+        escritorio.moveToFront(mc);
+                                   
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments

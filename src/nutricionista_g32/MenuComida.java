@@ -5,17 +5,31 @@
  */
 package nutricionista_g32;
 
-/**
- *
- * @author vvted
- */
+import javax.swing.table.DefaultTableModel;
+
+
 public class MenuComida extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form MenuComida
-     */
+    private final DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
+    
     public MenuComida() {
         initComponents();
+        
+        armarCabecera();
+        jBmodificar.setEnabled(false);
+        jBguardar.setEnabled(false);
+        jTnombre.setEnabled(false);
+        jTidComida.setEnabled(false);
+        jTcalorias.setEnabled(false);
+        jTableComidas.setEnabled(false);
+        jTbuscador.setEnabled(false);
+        jTdetalle.setEnabled(false);
+                
     }
 
     /**
@@ -27,21 +41,203 @@ public class MenuComida extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTidComida = new javax.swing.JTextField();
+        jTnombre = new javax.swing.JTextField();
+        jTcalorias = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jBmodificar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTdetalle = new javax.swing.JTextArea();
+        jTbuscador = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableComidas = new javax.swing.JTable();
+        jBguardar = new javax.swing.JButton();
+
+        setClosable(true);
+        setTitle("COMIDAS");
+
+        jLabel1.setText("Identificador");
+
+        jLabel2.setText("Nombre");
+
+        jLabel3.setText("Calorias");
+
+        jLabel4.setText("Detalle");
+
+        jTcalorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTcaloriasActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("NUEVO");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("BUSCAR");
+
+        jBmodificar.setText("MODIFICAR");
+
+        jTdetalle.setColumns(20);
+        jTdetalle.setRows(5);
+        jScrollPane1.setViewportView(jTdetalle);
+
+        jTbuscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTbuscadorActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Buscador");
+
+        jTableComidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableComidas);
+
+        jBguardar.setText("GUARDAR");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBmodificar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTcalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTidComida, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButton2)
+                                    .addComponent(jRadioButton1)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBguardar)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                    .addComponent(jTbuscador))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(150, 150, 150))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTidComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRadioButton1)
+                        .addComponent(jTbuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButton2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTcalorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(52, 52, 52)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jBmodificar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(jBguardar)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTcaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcaloriasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTcaloriasActionPerformed
+
+    private void jTbuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbuscadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTbuscadorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBguardar;
+    private javax.swing.JButton jBmodificar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableComidas;
+    private javax.swing.JTextField jTbuscador;
+    private javax.swing.JTextField jTcalorias;
+    private javax.swing.JTextArea jTdetalle;
+    private javax.swing.JTextField jTidComida;
+    private javax.swing.JTextField jTnombre;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        modelo.addColumn("ID");
+        modelo.addColumn("NOMBRE");
+        modelo.addColumn("CALORIAS");
+        modelo.addColumn("DETALLE");
+        jTableComidas.setModel(modelo);
+    }
+
+    private void borrarFilas() {
+        int f = jTableComidas.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+
+
+
 }
