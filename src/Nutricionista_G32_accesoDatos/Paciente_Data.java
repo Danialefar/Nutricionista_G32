@@ -136,7 +136,7 @@ public class Paciente_Data {
 
     public void bajaPaciente(int dni) {
         try {
-            String sql = "UPDATE paciente SET estado_paciente=0 WHERE dni=?";
+            String sql = " UPDATE paciente SET estado_paciente=0 WHERE dni_paciente=? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
             int fila = ps.executeUpdate();
