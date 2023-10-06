@@ -42,7 +42,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuPaciente = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMregistroConsulta = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -76,8 +76,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuPaciente);
 
-        jMenuItem2.setText("ListaPaciente");
-        jMenu1.add(jMenuItem2);
+        jMregistroConsulta.setText("RegistroConsulta");
+        jMregistroConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMregistroConsultaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMregistroConsulta);
 
         jMenuBar1.add(jMenu1);
 
@@ -145,6 +150,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                    
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMregistroConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMregistroConsultaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        RegistroConsultaPaciente rcp= new RegistroConsultaPaciente();
+        rcp.setVisible(true);
+        escritorio.add(rcp);
+        escritorio.moveToFront(rcp);
+    }//GEN-LAST:event_jMregistroConsultaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,11 +201,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuPaciente;
+    private javax.swing.JMenuItem jMregistroConsulta;
     // End of variables declaration//GEN-END:variables
 }

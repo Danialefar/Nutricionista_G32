@@ -49,8 +49,8 @@ public class MenuComida extends javax.swing.JInternalFrame {
         jTidComida = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
         jTcalorias = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRBnuevo = new javax.swing.JRadioButton();
+        jRBbuscar = new javax.swing.JRadioButton();
         jBmodificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTdetalle = new javax.swing.JTextArea();
@@ -77,11 +77,21 @@ public class MenuComida extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("NUEVO");
+        buttonGroup1.add(jRBnuevo);
+        jRBnuevo.setText("NUEVO");
+        jRBnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBnuevoActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("BUSCAR");
+        buttonGroup1.add(jRBbuscar);
+        jRBbuscar.setText("BUSCAR");
+        jRBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBbuscarActionPerformed(evt);
+            }
+        });
 
         jBmodificar.setText("MODIFICAR");
 
@@ -135,8 +145,8 @@ public class MenuComida extends javax.swing.JInternalFrame {
                                     .addComponent(jTidComida, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton1)))))
+                                    .addComponent(jRBbuscar)
+                                    .addComponent(jRBnuevo)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +172,7 @@ public class MenuComida extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTidComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRadioButton1)
+                        .addComponent(jRBnuevo)
                         .addComponent(jTbuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +180,7 @@ public class MenuComida extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton2))
+                            .addComponent(jRBbuscar))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
@@ -201,6 +211,32 @@ public class MenuComida extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTbuscadorActionPerformed
 
+    private void jRBnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBnuevoActionPerformed
+        jBmodificar.setEnabled(false);
+        jBguardar.setEnabled(true);
+        jTnombre.setEnabled(true);
+        jTidComida.setEnabled(false);
+        jTcalorias.setEnabled(true);
+        jTableComidas.setEnabled(false);
+        jTbuscador.setEnabled(false);
+        jTdetalle.setEnabled(true);
+    }//GEN-LAST:event_jRBnuevoActionPerformed
+
+    private void jRBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBbuscarActionPerformed
+        jBmodificar.setEnabled(false);
+        jBguardar.setEnabled(false);
+        jTnombre.setEnabled(false);
+        jTnombre.setText("");
+        jTidComida.setEnabled(false);
+        jTidComida.setText("");
+        jTcalorias.setEnabled(false);
+        jTcalorias.setText("");
+        jTableComidas.setEnabled(true);
+        jTbuscador.setEnabled(true);
+        jTdetalle.setEnabled(false);
+        jTdetalle.setText("");
+    }//GEN-LAST:event_jRBbuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -211,8 +247,8 @@ public class MenuComida extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRBbuscar;
+    private javax.swing.JRadioButton jRBnuevo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableComidas;
