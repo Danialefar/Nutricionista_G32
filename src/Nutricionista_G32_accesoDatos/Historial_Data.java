@@ -8,7 +8,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 
@@ -20,6 +22,8 @@ public class Historial_Data {
 
     private Connection con = null;
 
+    private Paciente_Data PD=new Paciente_Data ();
+    
     public void guardarHistorial(Historial historial) {
 
         String sql = "INSERT INTO historial (id_paciente, peso_registro, fecha_registro) "
@@ -43,8 +47,14 @@ public class Historial_Data {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA HISTORIAL" + ex.getMessage());
-        }
+             if (ex instanceof SQLIntegrityConstraintViolationException) {
+                
+               JOptionPane.showMessageDialog(null,"EL REGISTRO QUE SE INTENTA GENERAR YA HA EXISTE NO PUEDE VOLVER A INGRESARLO ");
+                // Aquí puedes tomar acciones específicas para manejar el error de duplicación
+            } else {         
+                JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA HISTORIAL" + ex.getMessage());
+        } 
+    }
     }
     
     public void modificarHistorial(Historial historial) {
@@ -86,4 +96,6 @@ public class Historial_Data {
         }
 
     }
+    
+    
 }

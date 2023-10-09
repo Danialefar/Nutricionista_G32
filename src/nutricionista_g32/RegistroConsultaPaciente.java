@@ -1,12 +1,17 @@
 package nutricionista_g32;
 
+import Nutricionista_G32_accesoDatos.Historial_Data;
 import Nutricionista_G32_accesoDatos.Paciente_Data;
+import Nutricionista_G32_entidades.Historial;
 import Nutricionista_G32_entidades.Paciente;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
+
+    private Paciente_Data Paciente_Data;
 
     public RegistroConsultaPaciente() {
         initComponents();
@@ -69,6 +74,11 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jBeliminarRegistro.setText("ELIMINAR");
 
         jBguardarRegistro.setText("GUARDAR");
+        jBguardarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarRegistroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,27 +175,27 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         try {
             int dni = Integer.parseInt(jTdniBuscar.getText());
             paciente = pD.buscarPacientePorDni(dni);
-            if (paciente != null){
-                if ( paciente.isEstado()==false){
+            if (paciente != null) {
+                if (paciente.isEstado() == false) {
                     JOptionPane.showMessageDialog(null, "EL PACIENTE ESTÁ DADO DE BAJA, DEBERÁ ACTIVARLO NUEVAMENTE ");
-                 
-                }else{
-                    
-                jBeliminarRegistro.setEnabled(true);
-                jBguardarRegistro.setEnabled(true);
-                jBmodificarRegistro.setEnabled(true);
-                jTfechaActual.setEnabled(true);
-                jTfechaActual.setEditable(false);
-                jTfechaActual.setText(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
-                jTapellidoPac.setEnabled(true);
-                jTnombrePac.setEnabled(true);
-                jTpesoControl.setEnabled(true);
-                jTidPac.setEnabled(false);
-                jTapellidoPac.setText(paciente.getApellido_paciente());
-                jTnombrePac.setText(paciente.getNombre_paciente());
-                jTidPac.setText(paciente.getId_paciente()+"");
-                
-            }
+
+                } else {
+
+                    jBeliminarRegistro.setEnabled(true);
+                    jBguardarRegistro.setEnabled(true);
+                    jBmodificarRegistro.setEnabled(true);
+                    jTfechaActual.setEnabled(true);
+                    jTfechaActual.setEditable(false);
+                    jTfechaActual.setText(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
+                    jTapellidoPac.setEnabled(true);
+                    jTnombrePac.setEnabled(true);
+                    jTpesoControl.setEnabled(true);
+                    jTidPac.setEnabled(false);
+                    jTapellidoPac.setText(paciente.getApellido_paciente());
+                    jTnombrePac.setText(paciente.getNombre_paciente());
+                    jTidPac.setText(paciente.getId_paciente() + "");
+
+                }
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO DE DNI VÁLIDO ");
@@ -193,6 +203,17 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jBbuscarPacActionPerformed
+
+    private void jBguardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarRegistroActionPerformed
+          
+        Paciente_Data pD = new Paciente_Data();
+        Paciente pac = pD.buscarPacientePorId(Integer.parseInt(jTidPac.getText()));
+        LocalDate fecha = LocalDate.now();
+        Historial registro = new Historial(pac, Double.parseDouble(jTpesoControl.getText()), fecha);
+        Historial_Data hD = new Historial_Data();
+        hD.guardarHistorial(registro);
+          
+    }//GEN-LAST:event_jBguardarRegistroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

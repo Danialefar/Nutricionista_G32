@@ -14,6 +14,13 @@ public class Paciente {
     public Paciente() {
     }
 
+    public Paciente(int id_paciente, String apellido_paciente, String nombre_paciente, int dni_paciente) {
+        this.id_paciente = id_paciente;
+        this.apellido_paciente = apellido_paciente;
+        this.nombre_paciente = nombre_paciente;
+        this.dni_paciente = dni_paciente;
+    }
+
     public Paciente(int id_paciente, String apellido_paciente, String nombre_paciente, int dni_paciente, String direccion_paciente, String telef_paciente, boolean estado) {
         this.id_paciente = id_paciente;
         this.apellido_paciente = apellido_paciente;
