@@ -5,6 +5,7 @@ import Nutricionista_G32_accesoDatos.Paciente_Data;
 import Nutricionista_G32_entidades.Historial;
 import Nutricionista_G32_entidades.Paciente;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -205,14 +206,28 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBbuscarPacActionPerformed
 
     private void jBguardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarRegistroActionPerformed
-          
+
         Paciente_Data pD = new Paciente_Data();
         Paciente pac = pD.buscarPacientePorId(Integer.parseInt(jTidPac.getText()));
         LocalDate fecha = LocalDate.now();
         Historial registro = new Historial(pac, Double.parseDouble(jTpesoControl.getText()), fecha);
         Historial_Data hD = new Historial_Data();
         hD.guardarHistorial(registro);
-          
+                
+        jBeliminarRegistro.setEnabled(false);
+        jBguardarRegistro.setEnabled(false);
+        jBmodificarRegistro.setEnabled(false);
+        jTfechaActual.setEnabled(false);
+        jTapellidoPac.setEnabled(false);
+        jTnombrePac.setEnabled(false);
+        jTpesoControl.setEnabled(false);
+        jTidPac.setEnabled(false);
+        jTfechaActual.setText("");
+        jTapellidoPac.setText("");
+        jTnombrePac.setText("");
+        jTpesoControl.setText("");
+        jTidPac.setText("");
+        jTdniBuscar.setText("");
     }//GEN-LAST:event_jBguardarRegistroActionPerformed
 
 

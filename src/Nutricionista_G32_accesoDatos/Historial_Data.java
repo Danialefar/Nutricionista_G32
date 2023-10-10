@@ -1,4 +1,3 @@
-
 package Nutricionista_G32_accesoDatos;
 
 import Nutricionista_G32_entidades.Historial;
@@ -13,8 +12,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
-
 public class Historial_Data {
+
     public Historial_Data() {
 
         con = Conexion.getConexion();
@@ -22,8 +21,8 @@ public class Historial_Data {
 
     private Connection con = null;
 
-    private Paciente_Data PD=new Paciente_Data ();
-    
+    private Paciente_Data PD = new Paciente_Data();
+
     public void guardarHistorial(Historial historial) {
 
         String sql = "INSERT INTO historial (id_paciente, peso_registro, fecha_registro) "
@@ -34,7 +33,6 @@ public class Historial_Data {
             ps.setInt(1, historial.getPaciente().getId_paciente());
             ps.setDouble(2, historial.getPeso_registro());
             ps.setDate(3, Date.valueOf(historial.getFecha_registro()));
-            
 
             ps.executeUpdate();
 
@@ -47,26 +45,25 @@ public class Historial_Data {
             ps.close();
 
         } catch (SQLException ex) {
-             if (ex instanceof SQLIntegrityConstraintViolationException) {
-                
-               JOptionPane.showMessageDialog(null,"EL REGISTRO QUE SE INTENTA GENERAR YA HA EXISTE NO PUEDE VOLVER A INGRESARLO ");
-                // Aquí puedes tomar acciones específicas para manejar el error de duplicación
-            } else {         
+            if (ex instanceof SQLIntegrityConstraintViolationException) {
+                JOptionPane.showMessageDialog(null, "EL REGISTRO QUE SE INTENTA GENERAR YA EXISTE, NO PUEDE VOLVER A INGRESARLO ");
+
+            } else {
                 JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA HISTORIAL" + ex.getMessage());
-        } 
+            }
+        }
     }
-    }
-    
+
     public void modificarHistorial(Historial historial) {
         String sql = "UPDATE historial SET peso_registro=? , fecha_registro=? "
                 + " WHERE id_historial=? ";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setDouble(1, historial.getPeso_registro() );
+            ps.setDouble(1, historial.getPeso_registro());
             ps.setDate(2, Date.valueOf(historial.getFecha_registro()));
             ps.setInt(3, historial.getId_historial());
-                                                       
+
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -94,8 +91,5 @@ public class Historial_Data {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA HISTORIAL" + e.getMessage());
         }
-
     }
-    
-    
 }
