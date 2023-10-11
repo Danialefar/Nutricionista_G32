@@ -1,10 +1,9 @@
-
 package Nutricionista_G32_entidades;
 
 import java.time.LocalDate;
 
-
 public class Historial {
+
     private int id_historial;
     private Paciente paciente;
     private double peso_registro;
@@ -25,6 +24,11 @@ public class Historial {
         this.peso_registro = peso_registro;
         this.fecha_registro = fecha_registro;
     }
+
+    public Historial(int id_historial, double peso_registro ) {
+        this.id_historial = id_historial;
+        this.peso_registro = peso_registro;
+        }
 
     public int getId_historial() {
         return id_historial;
@@ -57,6 +61,5 @@ public class Historial {
     public void setFecha_registro(LocalDate fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
-    
-    
+
 }

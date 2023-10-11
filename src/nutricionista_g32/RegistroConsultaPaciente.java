@@ -8,15 +8,24 @@ import java.sql.Date;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
+
+    private final DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
 
     private Paciente_Data Paciente_Data;
 
     public RegistroConsultaPaciente() {
         initComponents();
-
+        armarCabecera();
         jBeliminarRegistro.setEnabled(false);
         jBguardarRegistro.setEnabled(false);
         jBmodificarRegistro.setEnabled(false);
@@ -25,6 +34,8 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jTnombrePac.setEnabled(false);
         jTpesoControl.setEnabled(false);
         jTidPac.setEnabled(false);
+        jThistorial.setEnabled(false);
+        jBcambiarPeso.setEnabled(false);
 
     }
 
@@ -48,8 +59,12 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jBeliminarRegistro = new javax.swing.JButton();
         jBguardarRegistro = new javax.swing.JButton();
         jTfechaActual = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jThistorial = new javax.swing.JTable();
+        jBcambiarPeso = new javax.swing.JButton();
 
         setClosable(true);
+        setPreferredSize(new java.awt.Dimension(580, 590));
 
         jLabel1.setText("D.N.I Paciente");
 
@@ -71,13 +86,43 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jLabel6.setText("Nombre");
 
         jBmodificarRegistro.setText("MODIFICAR");
+        jBmodificarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmodificarRegistroActionPerformed(evt);
+            }
+        });
 
         jBeliminarRegistro.setText("ELIMINAR");
+        jBeliminarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBeliminarRegistroActionPerformed(evt);
+            }
+        });
 
         jBguardarRegistro.setText("GUARDAR");
         jBguardarRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBguardarRegistroActionPerformed(evt);
+            }
+        });
+
+        jThistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jThistorial);
+
+        jBcambiarPeso.setText("Cambiar Peso");
+        jBcambiarPeso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcambiarPesoActionPerformed(evt);
             }
         });
 
@@ -91,23 +136,14 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBbuscarPac)
-                        .addGap(25, 25, 25))
+                        .addComponent(jBbuscarPac))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTfechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTpesoControl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel4)
                                             .addComponent(jLabel5)
@@ -116,20 +152,36 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jTnombrePac)
-                                                .addComponent(jTapellidoPac)
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addComponent(jTidPac, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(0, 327, Short.MAX_VALUE))))))))
-                        .addGap(0, 23, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jBguardarRegistro)
-                .addGap(72, 72, 72)
-                .addComponent(jBmodificarRegistro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(jBeliminarRegistro)
-                .addGap(64, 64, 64))
+                                                    .addGap(0, 383, Short.MAX_VALUE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jTapellidoPac, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                                                        .addComponent(jTnombrePac))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTpesoControl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(jBcambiarPeso))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jBguardarRegistro)
+                                            .addGap(110, 110, 110)
+                                            .addComponent(jBmodificarRegistro)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jBeliminarRegistro))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTfechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 31, Short.MAX_VALUE)))))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,23 +206,27 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTpesoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(jTpesoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBcambiarPeso))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTfechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBguardarRegistro)
-                    .addComponent(jBmodificarRegistro)
-                    .addComponent(jBeliminarRegistro))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(jBeliminarRegistro)
+                    .addComponent(jBmodificarRegistro))
+                .addGap(159, 159, 159))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBbuscarPacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarPacActionPerformed
+        borrarFilas();
         Paciente_Data pD = new Paciente_Data();
         Paciente paciente = new Paciente();
         try {
@@ -192,10 +248,22 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     jTnombrePac.setEnabled(true);
                     jTpesoControl.setEnabled(true);
                     jTidPac.setEnabled(false);
+                    jBcambiarPeso.setEnabled(true);
                     jTapellidoPac.setText(paciente.getApellido_paciente());
                     jTnombrePac.setText(paciente.getNombre_paciente());
                     jTidPac.setText(paciente.getId_paciente() + "");
 
+                    int id = Integer.parseInt(jTidPac.getText());
+                    Historial hist = new Historial();
+                    Historial_Data hD = new Historial_Data();
+
+                    for (Historial hi : hD.cargarTabla(id)) {
+                        modelo.addRow(new Object[]{
+                            hi.getId_historial(),
+                            hi.getFecha_registro(),
+                            hi.getPeso_registro(),});
+                    }
+                    jThistorial.setEnabled(true);
                 }
             }
         } catch (NumberFormatException ex) {
@@ -213,7 +281,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         Historial registro = new Historial(pac, Double.parseDouble(jTpesoControl.getText()), fecha);
         Historial_Data hD = new Historial_Data();
         hD.guardarHistorial(registro);
-                
+
         jBeliminarRegistro.setEnabled(false);
         jBguardarRegistro.setEnabled(false);
         jBmodificarRegistro.setEnabled(false);
@@ -222,17 +290,108 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jTnombrePac.setEnabled(false);
         jTpesoControl.setEnabled(false);
         jTidPac.setEnabled(false);
+        jThistorial.setEnabled(false);
         jTfechaActual.setText("");
         jTapellidoPac.setText("");
         jTnombrePac.setText("");
         jTpesoControl.setText("");
         jTidPac.setText("");
         jTdniBuscar.setText("");
+        borrarFilas();
     }//GEN-LAST:event_jBguardarRegistroActionPerformed
+
+    private void jBmodificarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarRegistroActionPerformed
+        int filaSelec = jThistorial.getSelectedRow();
+        Historial_Data hD = new Historial_Data();
+        if (filaSelec != -1) {
+
+            int id = (Integer) modelo.getValueAt(filaSelec, 0);
+            double peso = Double.parseDouble((String) modelo.getValueAt(filaSelec, 2));
+
+            hD.modificarHistorial(peso, id);
+
+            jBeliminarRegistro.setEnabled(false);
+            jBguardarRegistro.setEnabled(false);
+            jBmodificarRegistro.setEnabled(false);
+            jTfechaActual.setEnabled(false);
+            jTapellidoPac.setEnabled(false);
+            jTnombrePac.setEnabled(false);
+            jTpesoControl.setEnabled(false);
+            jTidPac.setEnabled(false);
+            jThistorial.setEnabled(false);
+            jTfechaActual.setText("");
+            jTapellidoPac.setText("");
+            jTnombrePac.setText("");
+            jTpesoControl.setText("");
+            jTidPac.setText("");
+            jTdniBuscar.setText("");
+            borrarFilas();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR UN REGISTRO A MODIFICAR");
+        }
+
+    }//GEN-LAST:event_jBmodificarRegistroActionPerformed
+
+    private void jBcambiarPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcambiarPesoActionPerformed
+        try {
+            int filaSelec = jThistorial.getSelectedRow();
+            String pesoNuevo = (String) jTpesoControl.getText();
+            Double peso = Double.parseDouble(pesoNuevo);
+            if (filaSelec != -1) {
+                if (peso >= 1 && peso <= 500) {
+                    modelo.setValueAt(jTpesoControl.getText(), jThistorial.getSelectedRow(), 2);
+                    jTpesoControl.setText("");
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN VALOR NUMÉRICO ENTRE 1 y 500");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "SELECCIONE UN HISTORIAL DEL LISTADO");
+            }
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NÚMERO");
+            jTpesoControl.setText("");
+
+        }
+    }//GEN-LAST:event_jBcambiarPesoActionPerformed
+
+    private void jBeliminarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarRegistroActionPerformed
+        int filaSelec = jThistorial.getSelectedRow();
+        Historial_Data hD = new Historial_Data();
+       
+        if (filaSelec != -1) {
+
+            int id = (Integer) modelo.getValueAt(filaSelec, 0);
+            
+            hD.eliminarRegistro(id);
+
+            jBeliminarRegistro.setEnabled(false);
+            jBguardarRegistro.setEnabled(false);
+            jBmodificarRegistro.setEnabled(false);
+            jTfechaActual.setEnabled(false);
+            jTapellidoPac.setEnabled(false);
+            jTnombrePac.setEnabled(false);
+            jTpesoControl.setEnabled(false);
+            jTidPac.setEnabled(false);
+            jThistorial.setEnabled(false);
+            jTfechaActual.setText("");
+            jTapellidoPac.setText("");
+            jTnombrePac.setText("");
+            jTpesoControl.setText("");
+            jTidPac.setText("");
+            jTdniBuscar.setText("");
+            borrarFilas();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR UN REGISTRO A ELIMINAR");
+        }                                      
+    }//GEN-LAST:event_jBeliminarRegistroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscarPac;
+    private javax.swing.JButton jBcambiarPeso;
     private javax.swing.JButton jBeliminarRegistro;
     private javax.swing.JButton jBguardarRegistro;
     private javax.swing.JButton jBmodificarRegistro;
@@ -242,11 +401,28 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTapellidoPac;
     private javax.swing.JTextField jTdniBuscar;
     private javax.swing.JTextField jTfechaActual;
+    private javax.swing.JTable jThistorial;
     private javax.swing.JTextField jTidPac;
     private javax.swing.JTextField jTnombrePac;
     private javax.swing.JTextField jTpesoControl;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        modelo.addColumn("ID_HISTORIAL");
+        modelo.addColumn("FECHA CONTROL");
+        modelo.addColumn("PESO CONTROL");
+        jThistorial.setModel(modelo);
+    }
+
+    private void borrarFilas() {
+        int f = jThistorial.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+
 }
