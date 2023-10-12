@@ -53,7 +53,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        escritorio.setPreferredSize(new java.awt.Dimension(1100, 977));
+        escritorio.setPreferredSize(new java.awt.Dimension(1900, 1377));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);

@@ -19,6 +19,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         public boolean isCellEditable(int f, int c) {
             return false;
         }
+        
     };
 
     private Paciente_Data Paciente_Data;
@@ -416,6 +417,8 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         modelo.addColumn("FECHA CONTROL");
         modelo.addColumn("PESO CONTROL");
         jThistorial.setModel(modelo);
+//        int columnIndexToHide = 0;
+//        jThistorial.getColumnModel().getColumn(columnIndexToHide).setWidth(0);
     }
 
     private void borrarFilas() {

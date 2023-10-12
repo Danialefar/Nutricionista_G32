@@ -3,18 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/MenuComida.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/PantallaPrincipal.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_accesoDatos/Paciente_Data.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_entidades/Paciente.java</file>
             <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/RegistroConsultaPaciente.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_entidades/Dieta_Comida.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/Nutricionista_G32.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_entidades/TiposComida.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/MenuPaciente.java</file>
             <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_accesoDatos/Dieta_Data.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_entidades/Historial.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_accesoDatos/Historial_Data.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_accesoDatos/Comida_Data.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/PantallaPrincipal.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/Nutricionista_G32.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/MenuPaciente.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/nutricionista_g32/MenuComida.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/Nutricionista_G32/src/Nutricionista_G32_entidades/Dieta_Comida.java</file>
         </group>
     </open-files>
 </project-private>

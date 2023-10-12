@@ -84,7 +84,7 @@ public class Comida_Data {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Comida comida = new Comida();
-                comida.setId_comida(rs.getInt("id_comidas"));
+                comida.setId_comida(rs.getInt("id_comida"));
                 comida.setNombre_comida(rs.getString("nombre_comida"));
                 comida.setDetalle_comida(rs.getString("detalle_comida"));
                 comida.setCalorias_comida(rs.getInt("calorias_comida"));
