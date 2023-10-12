@@ -52,10 +52,13 @@
             <Property name="text" type="java.lang.String" value="Dieta"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuDieta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="MenuDieta"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuDietaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

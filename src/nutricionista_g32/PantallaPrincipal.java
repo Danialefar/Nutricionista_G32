@@ -47,7 +47,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuDieta = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
 
@@ -103,8 +103,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Dieta");
 
-        jMenuItem5.setText("MenuDieta");
-        jMenu3.add(jMenuItem5);
+        jMenuDieta.setText("MenuDieta");
+        jMenuDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDietaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuDieta);
 
         jMenuBar1.add(jMenu3);
 
@@ -159,6 +164,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(rcp);
     }//GEN-LAST:event_jMregistroConsultaActionPerformed
 
+    private void jMenuDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDietaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        MenuDieta md= new MenuDieta();
+        md.setVisible(true);
+        escritorio.add(md);
+        escritorio.moveToFront(md);
+              
+    }//GEN-LAST:event_jMenuDietaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,9 +216,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuDieta;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuPaciente;
     private javax.swing.JMenuItem jMregistroConsulta;

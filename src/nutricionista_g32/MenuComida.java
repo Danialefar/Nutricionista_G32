@@ -152,16 +152,20 @@ public class MenuComida extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(150, 150, 150))
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
                                 .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -182,20 +186,16 @@ public class MenuComida extends javax.swing.JInternalFrame {
                                         .addComponent(jRBbuscar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jBguardar))))
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                            .addComponent(jTbuscador)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-                    .addComponent(jTbuscador))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(150, 150, 150))
+                        .addGap(323, 323, 323)
+                        .addComponent(jBguardar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,13 +226,13 @@ public class MenuComida extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18))
+                            .addComponent(jLabel4)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)))
+                        .addGap(20, 20, 20)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jBguardar)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -302,12 +302,13 @@ public class MenuComida extends javax.swing.JInternalFrame {
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO VÁLIDO PARA CALORÍAS");
     }//GEN-LAST:event_jBguardarActionPerformed
+    }
 
     private void jTbuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscadorKeyReleased
         borrarFilas();
         Comida_Data cD = new Comida_Data();
-        for (Comida comid : cD.listarComidas()) {
 
+        for (Comida comid : cD.listarComidas()) {
             if (comid.getNombre_comida().toUpperCase().startsWith(jTbuscador.getText().toUpperCase())) {
 
                 modelo.addRow(new Object[]{
@@ -331,7 +332,7 @@ public class MenuComida extends javax.swing.JInternalFrame {
             jTcalorias.setText(jTableComidas.getValueAt(filaSelec, 2) + "");
             jTdetalle.setText(jTableComidas.getValueAt(filaSelec, 3) + "");
             jBmodificar.setEnabled(true);
-
+            jBeliminar.setEnabled(true);
         }
     }//GEN-LAST:event_jTableComidasMouseClicked
 
@@ -342,10 +343,10 @@ public class MenuComida extends javax.swing.JInternalFrame {
         int calorias = Integer.parseInt(jTcalorias.getText());
 
         Comida comida = new Comida(id, nombre, detalle, calorias, true);
-        Comida_Data cD = new Comida_Data ();
+        Comida_Data cD = new Comida_Data();
         cD.modificarComida(comida);
-        
-         borrarFilas();
+
+        borrarFilas();
         jBmodificar.setEnabled(false);
         jBguardar.setEnabled(false);
         jTnombre.setEnabled(false);
