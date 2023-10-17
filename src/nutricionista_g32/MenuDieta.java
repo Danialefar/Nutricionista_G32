@@ -6,8 +6,10 @@
 package nutricionista_g32;
 
 import Nutricionista_G32_accesoDatos.Comida_Data;
+import Nutricionista_G32_accesoDatos.Dieta_Data;
 import Nutricionista_G32_accesoDatos.Paciente_Data;
 import Nutricionista_G32_entidades.Comida;
+import Nutricionista_G32_entidades.Dieta;
 import Nutricionista_G32_entidades.Paciente;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -27,7 +29,6 @@ public class MenuDieta extends javax.swing.JInternalFrame {
         vista1();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,9 +48,10 @@ public class MenuDieta extends javax.swing.JInternalFrame {
         jTfechaFinal = new javax.swing.JTextField();
         jTpesoInicio = new javax.swing.JTextField();
         jBguardar = new javax.swing.JButton();
-        jBmodificar = new javax.swing.JButton();
-        jBeliminar = new javax.swing.JButton();
         jRbuscar = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        jTidDieta = new javax.swing.JTextField();
+        jCBnombreDieta = new javax.swing.JComboBox<>();
 
         setClosable(true);
 
@@ -76,11 +78,18 @@ public class MenuDieta extends javax.swing.JInternalFrame {
             }
         });
 
+        jTsemanas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTsemanasKeyReleased(evt);
+            }
+        });
+
         jBguardar.setText("GUARDAR");
-
-        jBmodificar.setText("MODIFICAR");
-
-        jBeliminar.setText("ELIMINAR");
+        jBguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarActionPerformed(evt);
+            }
+        });
 
         jRbuscar.setText("Buscar Paciente");
         jRbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +98,10 @@ public class MenuDieta extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel8.setText("Nombre de DIETA");
+
+        jCBnombreDieta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "elija el nombre", "DIETA KETO", "DIETA MEDITERRÁNEA", "DIETA CALÓRICA", "DIETA VEGANA", "DIETA VEGETARIANA", "DIETA DASH", "DIETA ORNISH", "DIETA D.M.A", " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,37 +109,38 @@ public class MenuDieta extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTpaciente)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTpaciente)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTpesoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                                    .addComponent(jTpesoFinal)
-                                    .addComponent(jTfechaInicio)
-                                    .addComponent(jTsemanas)
-                                    .addComponent(jTfechaFinal))
-                                .addGap(49, 49, 49)
-                                .addComponent(jRbuscar)
-                                .addGap(0, 72, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBguardar)
-                        .addGap(108, 108, 108)
-                        .addComponent(jBmodificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBeliminar)
-                        .addGap(98, 98, 98))))
+                            .addComponent(jBguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTpesoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                                        .addComponent(jTpesoFinal)
+                                        .addComponent(jTfechaInicio)
+                                        .addComponent(jTsemanas)
+                                        .addComponent(jTfechaFinal))
+                                    .addGap(49, 49, 49)
+                                    .addComponent(jRbuscar)
+                                    .addGap(31, 31, 31))
+                                .addComponent(jCBnombreDieta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 28, Short.MAX_VALUE)))
+                .addGap(7, 7, 7)
+                .addComponent(jTidDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,12 +174,14 @@ public class MenuDieta extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTfechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBguardar)
-                    .addComponent(jBmodificar)
-                    .addComponent(jBeliminar))
-                .addContainerGap(63, Short.MAX_VALUE))
+                    .addComponent(jLabel8)
+                    .addComponent(jTidDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBnombreDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jBguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -176,29 +192,64 @@ public class MenuDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTdniBuscarKeyReleased
 
     private void jTdniBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdniBuscarKeyPressed
-       
+
     }//GEN-LAST:event_jTdniBuscarKeyPressed
 
     private void jRbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbuscarActionPerformed
         Paciente_Data pD = new Paciente_Data();
-        Paciente paciente = new Paciente ();
+        Paciente paciente = new Paciente();
         try {
             int dni = Integer.parseInt(jTdniBuscar.getText());
             paciente = pD.buscarPacientePorDni(dni);
             jTpaciente.setText(paciente.toString());
             vista2();
-            
+
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO VÁLIDO");
 
-    }                                      
+        }
     }//GEN-LAST:event_jRbuscarActionPerformed
-    
+
+    private void jTsemanasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTsemanasKeyReleased
+        try {
+            LocalDate fecha = LocalDate.now().plusDays(Integer.parseInt(jTsemanas.getText()) * 7);
+            jTfechaFinal.setText(fecha + "");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NUMERO PARA LA SEMANA");
+        }
+    }//GEN-LAST:event_jTsemanasKeyReleased
+
+    private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
+        try {
+            double pesoInicial = Double.parseDouble(jTpesoInicio.getText());
+            double pesoFinal = Double.parseDouble(jTpesoFinal.getText());
+            int semana = Integer.parseInt(jTsemanas.getText());
+            if (jTpesoInicio.getText().isEmpty() || jTpesoFinal.getText().isEmpty() || jTsemanas.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "NINGUN CAMPO PUEDE ESTAR VACÍO");
+            } else if (jCBnombreDieta.getSelectedItem().toString().equals("elija el nombre")) {
+                JOptionPane.showMessageDialog(this, "DEBE ELEGIR UN NOMBRE PARA LA DIETA");
+            } else {
+                Paciente_Data pD = new Paciente_Data();
+                Paciente paciente = new Paciente();
+                int dni = Integer.parseInt(jTdniBuscar.getText());
+                paciente = pD.buscarPacientePorDni(dni);
+                Dieta_Data dD = new Dieta_Data();
+                Dieta dieta = new Dieta(jCBnombreDieta.getSelectedItem().toString(),
+                        paciente, pesoInicial, pesoFinal, LocalDate.now(),
+                        LocalDate.now().plusDays(Integer.parseInt(jTsemanas.getText()) * 7));
+                dD.guardarDieta(dieta);
+                vista1();
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NUMERO VALIDO");
+        }
+    }//GEN-LAST:event_jBguardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBeliminar;
     private javax.swing.JButton jBguardar;
-    private javax.swing.JButton jBmodificar;
+    private javax.swing.JComboBox<String> jCBnombreDieta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -206,54 +257,58 @@ public class MenuDieta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jRbuscar;
     private javax.swing.JTextField jTdniBuscar;
     private javax.swing.JTextField jTfechaFinal;
     private javax.swing.JTextField jTfechaInicio;
+    private javax.swing.JTextField jTidDieta;
     private javax.swing.JTextField jTpaciente;
     private javax.swing.JTextField jTpesoFinal;
     private javax.swing.JTextField jTpesoInicio;
     private javax.swing.JTextField jTsemanas;
     // End of variables declaration//GEN-END:variables
 
-public void vista1 (){
-jRbuscar.setEnabled(true);
-jTdniBuscar.setEnabled(true);
-jTpaciente.setEnabled(false);
-jTpesoInicio.setEnabled(false);
-jTpesoFinal.setEnabled(false);
-jTfechaInicio.setEnabled(false);
-jTsemanas.setEnabled(false);
-jTfechaFinal.setEnabled(false);
-jBguardar.setEnabled(false);
-jBmodificar.setEnabled(false);
-jBeliminar.setEnabled(false);
-jTdniBuscar.setText("");
-jTpaciente.setText("");
-jTpesoInicio.setText("");
-jTpesoFinal.setText("");
-jTfechaInicio.setText("");
-jTsemanas.setText("");
-jTfechaFinal.setText("");
-}
+    public void vista1() {
+        jRbuscar.setEnabled(true);
+        jTdniBuscar.setEnabled(true);
+        jTpaciente.setEnabled(false);
+        jTpesoInicio.setEnabled(false);
+        jTpesoFinal.setEnabled(false);
+        jTfechaInicio.setEnabled(false);
+        jTfechaInicio.setEditable(false);
+        jTsemanas.setEnabled(false);
+        jTfechaFinal.setEnabled(false);
+        jTfechaFinal.setEditable(false);
+        jBguardar.setEnabled(false);
+        jTidDieta.setVisible(false);
+        jCBnombreDieta.setEnabled(false);
+        jTdniBuscar.setText("");
+        jTpaciente.setText("");
+        jTpesoInicio.setText("");
+        jTpesoFinal.setText("");
+        jTfechaInicio.setText("");
+        jTsemanas.setText("");
+        jTfechaFinal.setText("");
 
-public void vista2 (){
-jRbuscar.setEnabled(true);
-jTdniBuscar.setEnabled(true);
-jTpaciente.setEnabled(true);
-jTpesoInicio.setEnabled(true);
-jTpesoFinal.setEnabled(true);
-jTfechaInicio.setEnabled(true);
-jTsemanas.setEnabled(true);
-jTfechaFinal.setEnabled(true);
-jBguardar.setEnabled(true);
-jBmodificar.setEnabled(false);
-jBeliminar.setEnabled(false);
-jTfechaInicio.setText(Date.valueOf(LocalDate.now())+"");
-jTpesoInicio.setText("");
-jTpesoFinal.setText("");
-jTsemanas.setText("");
-jTfechaFinal.setText("");
-}
+    }
+
+    public void vista2() {
+        jRbuscar.setEnabled(true);
+        jTdniBuscar.setEnabled(true);
+        jTpaciente.setEnabled(true);
+        jTpesoInicio.setEnabled(true);
+        jTpesoFinal.setEnabled(true);
+        jTfechaInicio.setEnabled(true);
+        jTsemanas.setEnabled(true);
+        jTfechaFinal.setEnabled(true);
+        jBguardar.setEnabled(true);
+        jCBnombreDieta.setEnabled(true);
+        jTfechaInicio.setText(Date.valueOf(LocalDate.now()) + "");
+        jTpesoInicio.setText("");
+        jTpesoFinal.setText("");
+        jTsemanas.setText("");
+        jTfechaFinal.setText("");
+    }
 
 }

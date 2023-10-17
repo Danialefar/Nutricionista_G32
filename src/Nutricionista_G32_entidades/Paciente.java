@@ -100,7 +100,7 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "id.=" + id_paciente + " - " + apellido_paciente + ", " + nombre_paciente + "- dni: " + dni_paciente;
+        return id_paciente + " - " + apellido_paciente + ", " + nombre_paciente + " - " + dni_paciente ;
     }
     
     

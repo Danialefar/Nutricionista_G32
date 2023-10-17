@@ -27,7 +27,7 @@ public class Dieta_Data {
 
     public void guardarDieta(Dieta dieta) {
 
-        String sql = " INSERT INTO dieta ( nombre_dieta, id_paciente, peso_inicial, peso_final, fecha_incio, fecha_final )"
+        String sql = " INSERT INTO dieta ( nombre_dieta, id_paciente, peso_inicial, peso_final, fecha_inicial, fecha_final )"
                 + " VALUES (?,?,?,?,?,?) ";
 
         try {
@@ -146,6 +146,33 @@ public class Dieta_Data {
         try {
             String sql = "SELECT * FROM dieta WHERE fecha_final > CURRENT_DATE() OR fecha_final != null ";
             PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Dieta dieta = new Dieta();
+                dieta.setId_dieta(rs.getInt("id_dieta"));
+                dieta.setNombre_dieta(rs.getString("nombre_dieta"));
+                Paciente pac=pD.buscarPacientePorId(rs.getInt("id_paciente"));
+                dieta.setPaciente(pac);
+                dieta.setPeso_incial(rs.getDouble("peso_inicial"));
+                dieta.setPeso_final(rs.getDouble("peso_final"));
+                dieta.setFecha_inicial(rs.getDate("fecha_inicial").toLocalDate());
+                dieta.setFecha_final(rs.getDate("fecha_final").toLocalDate());
+                dietas.add(dieta);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA DIETA" + ex.getMessage());
+        }
+        return dietas;
+    }
+    
+    public List<Dieta> listarDietasPorPaciente(int id) {
+        List<Dieta> dietas = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM dieta WHERE id_paciente=? ";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Dieta dieta = new Dieta();
