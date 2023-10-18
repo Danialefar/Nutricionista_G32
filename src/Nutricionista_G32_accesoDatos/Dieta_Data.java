@@ -88,6 +88,30 @@ public class Dieta_Data {
         return dieta;
     }
 
+    public boolean buscarDietaPorPaciente(int id_paciente) {
+
+        String sql = "SELECT * FROM dieta WHERE id_paciente = ? ";
+
+        boolean resultado = false;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id_paciente);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                resultado = true;
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA DIETA" + ex.getMessage());
+        }
+
+        return resultado;
+    }
+    
+    
     public List<Dieta> listarDietasNoFinalizadas() {
         List<Dieta> dietas = new ArrayList<>();
         try {

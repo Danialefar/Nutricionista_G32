@@ -1,5 +1,6 @@
 package nutricionista_g32;
 
+import Nutricionista_G32_accesoDatos.Dieta_Data;
 import Nutricionista_G32_accesoDatos.Historial_Data;
 import Nutricionista_G32_accesoDatos.Paciente_Data;
 import Nutricionista_G32_entidades.Historial;
@@ -14,19 +15,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
-    private final DefaultTableModel modelo = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int f, int c) {
-            return false;
-        }
-        
-    };
+    private DefaultTableModel modelo;
 
     private Paciente_Data Paciente_Data;
 
     public RegistroConsultaPaciente() {
         initComponents();
-        armarCabecera();
+
+        modelo = (DefaultTableModel) jThistorial.getModel();
+
         jBeliminarRegistro.setEnabled(false);
         jBguardarRegistro.setEnabled(false);
         jBmodificarRegistro.setEnabled(false);
@@ -109,16 +106,36 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
         jThistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "FECHA CONTROL", "PESO CONTROL"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jThistorial.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jThistorial);
+        if (jThistorial.getColumnModel().getColumnCount() > 0) {
+            jThistorial.getColumnModel().getColumn(0).setMinWidth(0);
+            jThistorial.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jThistorial.getColumnModel().getColumn(0).setMaxWidth(0);
+            jThistorial.getColumnModel().getColumn(1).setResizable(false);
+            jThistorial.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jBcambiarPeso.setText("Cambiar Peso");
         jBcambiarPeso.addActionListener(new java.awt.event.ActionListener() {
@@ -230,13 +247,18 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         borrarFilas();
         Paciente_Data pD = new Paciente_Data();
         Paciente paciente = new Paciente();
+        Dieta_Data dD = new Dieta_Data();
         try {
             int dni = Integer.parseInt(jTdniBuscar.getText());
             paciente = pD.buscarPacientePorDni(dni);
-            if (paciente != null) {
-                if (paciente.isEstado() == false) {
-                    JOptionPane.showMessageDialog(null, "EL PACIENTE ESTÁ DADO DE BAJA, DEBERÁ ACTIVARLO NUEVAMENTE ");
 
+            if (paciente != null) {
+                if (!dD.buscarDietaPorPaciente(paciente.getId_paciente())) {
+                    JOptionPane.showMessageDialog(null, "EL PACIENTE NO TIENE UNA DIETA ASIGNADA, DEBE REGISTRAR UNA DIETA");
+                    jTdniBuscar.setText("");
+                }else if (paciente.isEstado() == false) {
+                    JOptionPane.showMessageDialog(null, "EL PACIENTE ESTÁ DADO DE BAJA, DEBERÁ ACTIVARLO NUEVAMENTE ");
+                    jTdniBuscar.setText("");
                 } else {
 
                     jBeliminarRegistro.setEnabled(true);
@@ -266,6 +288,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     }
                     jThistorial.setEnabled(true);
                 }
+
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO DE DNI VÁLIDO ");
@@ -360,11 +383,11 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
     private void jBeliminarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarRegistroActionPerformed
         int filaSelec = jThistorial.getSelectedRow();
         Historial_Data hD = new Historial_Data();
-       
+
         if (filaSelec != -1) {
 
             int id = (Integer) modelo.getValueAt(filaSelec, 0);
-            
+
             hD.eliminarRegistro(id);
 
             jBeliminarRegistro.setEnabled(false);
@@ -386,7 +409,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
         } else {
             JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR UN REGISTRO A ELIMINAR");
-        }                                      
+        }
     }//GEN-LAST:event_jBeliminarRegistroActionPerformed
 
 
