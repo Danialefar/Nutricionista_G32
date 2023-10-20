@@ -201,8 +201,13 @@ public class MenuDieta extends javax.swing.JInternalFrame {
         try {
             int dni = Integer.parseInt(jTdniBuscar.getText());
             paciente = pD.buscarPacientePorDni(dni);
-            jTpaciente.setText(paciente.toString());
-            vista2();
+            if (paciente.isEstado() == false) {
+                JOptionPane.showMessageDialog(null, "EL PACIENTE ESTÁ DADO DE BAJA, DEBERÁ ACTIVARLO NUEVAMENTE ");
+                jTdniBuscar.setText("");
+            } else {
+                jTpaciente.setText(paciente.toString());
+                vista2();
+            }
 
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO VÁLIDO");
@@ -220,6 +225,9 @@ public class MenuDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTsemanasKeyReleased
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
+        Dieta_Data dD = new Dieta_Data();
+        Paciente_Data pD = new Paciente_Data();
+        Paciente paciente = new Paciente();
         try {
             double pesoInicial = Double.parseDouble(jTpesoInicio.getText());
             double pesoFinal = Double.parseDouble(jTpesoFinal.getText());
@@ -228,12 +236,13 @@ public class MenuDieta extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "NINGUN CAMPO PUEDE ESTAR VACÍO");
             } else if (jCBnombreDieta.getSelectedItem().toString().equals("elija el nombre")) {
                 JOptionPane.showMessageDialog(this, "DEBE ELEGIR UN NOMBRE PARA LA DIETA");
+            } else if (dD.buscarDietaPorPaciente(paciente.getId_paciente())) {
+                JOptionPane.showMessageDialog(this, "EL PACIENTE TIENE UNA DIETA ACTIVA, DEBE FINALIZARLA");
+                vista1();
             } else {
-                Paciente_Data pD = new Paciente_Data();
-                Paciente paciente = new Paciente();
+
                 int dni = Integer.parseInt(jTdniBuscar.getText());
                 paciente = pD.buscarPacientePorDni(dni);
-                Dieta_Data dD = new Dieta_Data();
                 Dieta dieta = new Dieta(jCBnombreDieta.getSelectedItem().toString(),
                         paciente, pesoInicial, pesoFinal, LocalDate.now(),
                         LocalDate.now().plusDays(Integer.parseInt(jTsemanas.getText()) * 7));

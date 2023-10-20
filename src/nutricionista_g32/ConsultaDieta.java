@@ -9,6 +9,7 @@ import Nutricionista_G32_accesoDatos.Dieta_Data;
 import Nutricionista_G32_accesoDatos.Paciente_Data;
 import Nutricionista_G32_entidades.Dieta;
 import Nutricionista_G32_entidades.Paciente;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,15 +19,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultaDieta extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel model = new DefaultTableModel();
-
-    public boolean inCelEditable(int f, int c) {
-        return false;
-    }
+    private DefaultTableModel modelo;
+    private DefaultTableModel model;
 
     public ConsultaDieta() {
         initComponents();
-        armarCabecera();
+        modelo = (DefaultTableModel) jTdieta.getModel();
+        model = (DefaultTableModel) jTdietaFinalizada.getModel();
+
+        jBmodificar.setEnabled(false);
+        jBfinalizar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -46,29 +48,62 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
         jTpesoFinal = new javax.swing.JTextField();
         jTfechaFinal = new javax.swing.JTextField();
         jBmodificar = new javax.swing.JButton();
-        jBeliminar = new javax.swing.JButton();
+        jBfinalizar = new javax.swing.JButton();
         jCBnombre = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTdietaFinalizada = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(1096, 605));
+        setPreferredSize(new java.awt.Dimension(1096, 505));
 
         jTdieta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "Nombre", "Paciente", "Peso Inicial", "Peso Objetivo", "Fecha Incio", "Fecha Final"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTdieta.getTableHeader().setReorderingAllowed(false);
         jTdieta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTdietaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTdieta);
+        if (jTdieta.getColumnModel().getColumnCount() > 0) {
+            jTdieta.getColumnModel().getColumn(0).setMinWidth(0);
+            jTdieta.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jTdieta.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTdieta.getColumnModel().getColumn(1).setResizable(false);
+            jTdieta.getColumnModel().getColumn(2).setMinWidth(300);
+            jTdieta.getColumnModel().getColumn(2).setPreferredWidth(300);
+            jTdieta.getColumnModel().getColumn(2).setMaxWidth(300);
+            jTdieta.getColumnModel().getColumn(3).setResizable(false);
+            jTdieta.getColumnModel().getColumn(4).setResizable(false);
+            jTdieta.getColumnModel().getColumn(5).setResizable(false);
+            jTdieta.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         jLabel3.setText("DNI Paciente");
 
@@ -94,26 +129,84 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
         });
 
         jBmodificar.setText("MODIFICAR");
+        jBmodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmodificarActionPerformed(evt);
+            }
+        });
 
-        jBeliminar.setText("ELIMINAR");
+        jBfinalizar.setText("FINALIZAR DIETA");
+        jBfinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBfinalizarActionPerformed(evt);
+            }
+        });
 
         jCBnombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "elija el nombre", "DIETA KETO", "DIETA MEDITERRÁNEA", "DIETA CALÓRICA", "DIETA VEGANA", "DIETA VEGETARIANA", "DIETA DASH", "DIETA ORNISH", "DIETA D.M.A" }));
+
+        jTdietaFinalizada.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "id", "Nombre", "Paciente", "Peso Inicial", "Peso Objetivo", "Fecha Incio", "Fecha Final"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTdietaFinalizada.getTableHeader().setReorderingAllowed(false);
+        jTdietaFinalizada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTdietaFinalizadaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTdietaFinalizada);
+        if (jTdietaFinalizada.getColumnModel().getColumnCount() > 0) {
+            jTdietaFinalizada.getColumnModel().getColumn(0).setMinWidth(0);
+            jTdietaFinalizada.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jTdietaFinalizada.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTdietaFinalizada.getColumnModel().getColumn(1).setResizable(false);
+            jTdietaFinalizada.getColumnModel().getColumn(2).setMinWidth(300);
+            jTdietaFinalizada.getColumnModel().getColumn(2).setPreferredWidth(300);
+            jTdietaFinalizada.getColumnModel().getColumn(2).setMaxWidth(300);
+            jTdietaFinalizada.getColumnModel().getColumn(3).setResizable(false);
+            jTdietaFinalizada.getColumnModel().getColumn(4).setResizable(false);
+            jTdietaFinalizada.getColumnModel().getColumn(5).setResizable(false);
+            jTdietaFinalizada.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        jLabel6.setFont(new java.awt.Font("Impact", 1, 18)); // NOI18N
+        jLabel6.setText("D I E T A S   F I N A L I Z A D A S");
+
+        jLabel7.setFont(new java.awt.Font("Impact", 1, 18)); // NOI18N
+        jLabel7.setText(" D I E T A S   A C T I V A S ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180)
-                .addComponent(jBbuscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(24, Short.MAX_VALUE))
@@ -126,20 +219,38 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
                             .addComponent(jTpesoInicial)
                             .addComponent(jTpesoFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
                         .addGap(118, 118, 118)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
                                 .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTfechaFinal))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTfechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCBnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jBmodificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBeliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jBfinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(180, 180, 180)
+                        .addComponent(jBbuscar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,31 +260,197 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
                     .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBbuscar))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jTpesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTfechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jBmodificar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel5)
-                        .addComponent(jCBnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBeliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTpesoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTpesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jTfechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBmodificar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTpesoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(jCBnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBfinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+        buscar();
+        jBmodificar.setEnabled(false);
+        jBfinalizar.setEnabled(false);
+        jTpesoInicial.setText("");
+        jTpesoFinal.setText("");
+        jTfechaFinal.setText("");
+        jCBnombre.setSelectedIndex(0);
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
+    private void jTfechaFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfechaFinalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTfechaFinalActionPerformed
+
+    private void jTdietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTdietaMouseClicked
+        int filaSelec = jTdieta.getSelectedRow();
+        int opc = resultadoOpcion(modelo.getValueAt(filaSelec, 1) + "");
+        if (filaSelec != -1) {
+            jTpesoInicial.setText(modelo.getValueAt(filaSelec, 3) + "");
+            jTpesoFinal.setText(modelo.getValueAt(filaSelec, 4) + "");
+            jTfechaFinal.setText(modelo.getValueAt(filaSelec, 6) + "");
+            jCBnombre.setSelectedIndex(opc);
+            jBmodificar.setEnabled(true);
+            jBfinalizar.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTdietaMouseClicked
+
+    private void jTdietaFinalizadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTdietaFinalizadaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTdietaFinalizadaMouseClicked
+
+    private void jBfinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinalizarActionPerformed
+        int filaSelec = jTdieta.getSelectedRow();
+        int id = Integer.parseInt(jTdieta.getValueAt(filaSelec, 0) + "");
+        Dieta_Data dD = new Dieta_Data();
+        if (filaSelec != -1) {
+            dD.finalizarDieta(id);
+            buscar();
+
+            jTpesoInicial.setText("");
+            jTpesoFinal.setText("");
+            jTfechaFinal.setText("");
+            jCBnombre.setSelectedIndex(0);
+            jBmodificar.setEnabled(false);
+            jBfinalizar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jBfinalizarActionPerformed
+
+    private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
+        Paciente_Data pD = new Paciente_Data();
+        Dieta_Data dD = new Dieta_Data();
+        int filaSelec = jTdieta.getSelectedRow();
+        int id = Integer.parseInt(jTdieta.getValueAt(filaSelec, 0) + "");
+        String nombre = jCBnombre.getSelectedItem().toString();
+        Paciente paciente = pD.buscarPacientePorDni(Integer.parseInt(jTdniBuscar.getText() + ""));
+        LocalDate fechaIni = LocalDate.parse(jTdieta.getValueAt(filaSelec, 5) + "");
+        LocalDate fechaFin = LocalDate.parse(jTfechaFinal.getText());
+        double pesoIni = Double.parseDouble(jTpesoInicial.getText());
+        double pesoFin = Double.parseDouble(jTpesoFinal.getText());
+
+        Dieta dieta = new Dieta(id, nombre, paciente, pesoIni, pesoFin, fechaIni, fechaFin);
+
+        dD.modificarDieta(dieta);
+        buscar();
+
+        jTpesoInicial.setText("");
+        jTpesoFinal.setText("");
+        jTfechaFinal.setText("");
+        jCBnombre.setSelectedIndex(0);
+        jBmodificar.setEnabled(false);
+        jBfinalizar.setEnabled(false);
+
+    }//GEN-LAST:event_jBmodificarActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBfinalizar;
+    private javax.swing.JButton jBmodificar;
+    private javax.swing.JComboBox<String> jCBnombre;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTdieta;
+    private javax.swing.JTable jTdietaFinalizada;
+    private javax.swing.JTextField jTdniBuscar;
+    private javax.swing.JTextField jTfechaFinal;
+    private javax.swing.JTextField jTpesoFinal;
+    private javax.swing.JTextField jTpesoInicial;
+    // End of variables declaration//GEN-END:variables
+private void armarCabecera() {
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Paciente");
+        modelo.addColumn("Peso Inicial");
+        modelo.addColumn("Peso Objetivo");
+        modelo.addColumn("Fecha Inicio");
+        modelo.addColumn("Fecha Final");
+
+        jTdieta.setModel(modelo);
+
+    }
+
+    private void borrarFila() {
+
+        int f = jTdieta.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+
+        }
+    }
+
+    private void borrarFila1() {
+
+        int f = jTdietaFinalizada.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            model.removeRow(f);
+
+        }
+    }
+
+    private int resultadoOpcion(String nombre) {
+        int resultado = 0;
+        switch (nombre) {
+            case "DIETA KETO":
+                resultado = 1;
+                break;
+            case "DIETA MEDITERRÁNEA":
+                resultado = 2;
+                break;
+            case "DIETA CALÓRICA":
+                resultado = 3;
+                break;
+            case "DIETA VEGANA":
+                resultado = 4;
+                break;
+            case "DIETA VEGETARIANA":
+                resultado = 5;
+                break;
+            case "DIETA DASH":
+                resultado = 6;
+                break;
+            case "DIETA ORNISH":
+                resultado = 7;
+                break;
+            case "DIETA D.M.A ":
+                resultado = 8;
+                break;
+
+        }
+
+        return resultado;
+    }
+
+    private void buscar() {
+        borrarFila1();
+        borrarFila();
+
         try {
             int dni = Integer.parseInt(jTdniBuscar.getText());
             if (jTdniBuscar.getText().isEmpty()) {
@@ -183,9 +460,9 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
                 Paciente paciente = new Paciente();
                 int id = pD.buscarPacientePorDni(dni).getId_paciente();
                 Dieta_Data dD = new Dieta_Data();
-                for (Dieta dieta : dD.listarDietasPorPaciente(id)) {
-                    borrarFila();
-                    model.addRow(new Object[]{
+                for (Dieta dieta : dD.listarDietasNOFinalizadasPorPaciente(id)) {
+
+                    modelo.addRow(new Object[]{
                         dieta.getId_dieta(),
                         dieta.getNombre_dieta(),
                         dieta.getPaciente().toString(),
@@ -195,83 +472,23 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
                         dieta.getFecha_final(),});
 
                 }
+
+                for (Dieta diet : dD.listarDietasFinalizadasPorPaciente(id)) {
+
+                    model.addRow(new Object[]{
+                        diet.getId_dieta(),
+                        diet.getNombre_dieta(),
+                        diet.getPaciente().toString(),
+                        diet.getPeso_incial(),
+                        diet.getPeso_final(),
+                        diet.getFecha_inicial(),
+                        diet.getFecha_final(),});
+
+                }
             }
-            }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NÚMERO VÁLIDO PARA EL DNI");
         }
-    }//GEN-LAST:event_jBbuscarActionPerformed
-
-    private void jTfechaFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfechaFinalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTfechaFinalActionPerformed
-
-    private void jTdietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTdietaMouseClicked
-        int filaSelec = jTdieta.getSelectedRow();
-        int opc= resultadoOpcion(model.getValueAt(filaSelec, 2)+"");
-        JOptionPane.showMessageDialog(this, opc);
-        if(filaSelec!=-1){
-        jTpesoInicial.setText(model.getValueAt(filaSelec, 3)+"");
-        jTpesoFinal.setText(model.getValueAt(filaSelec, 4)+"");
-        jTfechaFinal.setText(model.getValueAt(filaSelec, 6)+"");
-        jCBnombre.setSelectedIndex(opc);
-        }
-    }//GEN-LAST:event_jTdietaMouseClicked
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBbuscar;
-    private javax.swing.JButton jBeliminar;
-    private javax.swing.JButton jBmodificar;
-    private javax.swing.JComboBox<String> jCBnombre;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTdieta;
-    private javax.swing.JTextField jTdniBuscar;
-    private javax.swing.JTextField jTfechaFinal;
-    private javax.swing.JTextField jTpesoFinal;
-    private javax.swing.JTextField jTpesoInicial;
-    // End of variables declaration//GEN-END:variables
-private void armarCabecera() {
-        model.addColumn("Id");
-        model.addColumn("Nombre");
-        model.addColumn("Paciente");
-        model.addColumn("Peso Inicial");
-        model.addColumn("Peso Objetivo");
-        model.addColumn("Fecha Inicio");
-        model.addColumn("Fecha Final");
-
-        jTdieta.setModel(model);
 
     }
-
-    private void borrarFila() {
-
-        int f = jTdieta.getRowCount() - 1;
-        for (; f >= 0; f--) {
-            model.removeRow(f);
-        }
-    }
-
-    private int resultadoOpcion(String nombre) {
-       int resultado=0;
-       JOptionPane.showMessageDialog(this, nombre);
-       switch(nombre){
-           case "DIETA KETO": resultado= 1; break;
-           case "DIETA MEDITERRÁNEA": resultado= 2; break;
-           case "DIETA CALÓRICA": resultado= 3; break;
-           case "DIETA VEGANA": resultado= 4; break;
-           case "DIETA VEGETARIANA": resultado= 5; break;
-           case "DIETA DASH": resultado= 6; break;
-           case "DIETA ORNISH": resultado= 7; break;
-           case "DIETA D.M.A ": resultado= 8; break;
-
-       }
-        
-       return resultado;
-    }
-
 }

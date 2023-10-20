@@ -5,11 +5,8 @@ import Nutricionista_G32_accesoDatos.Historial_Data;
 import Nutricionista_G32_accesoDatos.Paciente_Data;
 import Nutricionista_G32_entidades.Historial;
 import Nutricionista_G32_entidades.Paciente;
-import java.sql.Date;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -253,11 +250,27 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
             paciente = pD.buscarPacientePorDni(dni);
 
             if (paciente != null) {
-                if (!dD.buscarDietaPorPaciente(paciente.getId_paciente())) {
-                    JOptionPane.showMessageDialog(null, "EL PACIENTE NO TIENE UNA DIETA ASIGNADA, DEBE REGISTRAR UNA DIETA");
-                    jTdniBuscar.setText("");
-                }else if (paciente.isEstado() == false) {
+                if (paciente.isEstado() == false) {
                     JOptionPane.showMessageDialog(null, "EL PACIENTE ESTÁ DADO DE BAJA, DEBERÁ ACTIVARLO NUEVAMENTE ");
+                    jTdniBuscar.setText("");
+                        
+
+                } else if (!dD.buscarDietaPorPaciente(paciente.getId_paciente())) {
+                    JOptionPane.showMessageDialog(null, "EL PACIENTE NO TIENE UNA DIETA ASIGNADA, DEBE REGISTRAR UNA DIETA");
+                    jBeliminarRegistro.setEnabled(false);
+                    jBguardarRegistro.setEnabled(false);
+                    jBmodificarRegistro.setEnabled(false);
+                    jTfechaActual.setEnabled(false);
+                    jTapellidoPac.setEnabled(false);
+                    jTnombrePac.setEnabled(false);
+                    jTpesoControl.setEnabled(false);
+                    jTidPac.setEnabled(false);
+                    jThistorial.setEnabled(false);
+                    jTfechaActual.setText("");
+                    jTapellidoPac.setText("");
+                    jTnombrePac.setText("");
+                    jTpesoControl.setText("");
+                    jTidPac.setText("");
                     jTdniBuscar.setText("");
                 } else {
 

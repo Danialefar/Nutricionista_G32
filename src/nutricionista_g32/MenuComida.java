@@ -147,6 +147,11 @@ public class MenuComida extends javax.swing.JInternalFrame {
         });
 
         jBeliminar.setText("ELIMINAR");
+        jBeliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBeliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -361,6 +366,32 @@ public class MenuComida extends javax.swing.JInternalFrame {
         jTcalorias.setText("");
         jTdetalle.setText("");
     }//GEN-LAST:event_jBmodificarActionPerformed
+
+    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
+        int filaSelec = jTableComidas.getSelectedRow();
+        Comida_Data cD = new Comida_Data();
+
+        if (filaSelec != -1) {
+            int id = Integer.parseInt(jTableComidas.getValueAt(filaSelec, 0) + "");
+            cD.bajaComida(id);
+
+            borrarFilas();
+            jBmodificar.setEnabled(false);
+            jBguardar.setEnabled(true);
+            jTnombre.setEnabled(true);
+            jTidComida.setEnabled(false);
+            jTcalorias.setEnabled(true);
+            jTableComidas.setEnabled(false);
+            jTbuscador.setEnabled(false);
+            jTdetalle.setEnabled(true);
+            jBeliminar.setEnabled(false);
+            jTbuscador.setText("");
+            jTidComida.setText("");
+            jTnombre.setText("");
+            jTcalorias.setText("");
+            jTdetalle.setText("");
+        }
+    }//GEN-LAST:event_jBeliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

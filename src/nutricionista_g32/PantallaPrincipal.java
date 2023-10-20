@@ -45,7 +45,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMregistroConsulta = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuDieta = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -96,9 +95,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem3);
-
-        jMenuItem4.setText("ListaComida");
-        jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
 
@@ -237,7 +233,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuDieta;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuPaciente;
     private javax.swing.JMenuItem jMregistroConsulta;

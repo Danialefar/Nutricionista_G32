@@ -1,4 +1,3 @@
-
 package Nutricionista_G32_accesoDatos;
 
 import Nutricionista_G32_entidades.Comida;
@@ -12,18 +11,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class Dieta_Data {
-    
-     public Dieta_Data() {
+
+    public Dieta_Data() {
         con = Conexion.getConexion();
     }
 
     private Connection con = null;
-    
-    private Paciente_Data pD=new Paciente_Data();
+
+    private Paciente_Data pD = new Paciente_Data();
 
     public void guardarDieta(Dieta dieta) {
 
@@ -69,7 +69,7 @@ public class Dieta_Data {
                 dieta = new Dieta();
                 dieta.setId_dieta(rs.getInt("id_dieta"));
                 dieta.setNombre_dieta(rs.getString("nombre_dieta"));
-                Paciente pac=pD.buscarPacientePorId(rs.getInt("id_paciente"));
+                Paciente pac = pD.buscarPacientePorId(rs.getInt("id_paciente"));
                 dieta.setPaciente(pac);
                 dieta.setPeso_incial(rs.getDouble("peso_inicial"));
                 dieta.setPeso_final(rs.getDouble("peso_final"));
@@ -90,18 +90,23 @@ public class Dieta_Data {
 
     public boolean buscarDietaPorPaciente(int id_paciente) {
 
-        String sql = "SELECT * FROM dieta WHERE id_paciente = ? ";
-
-        boolean resultado = false;
+        String sql = "SELECT COUNT(*) AS CANTIDAD FROM dieta WHERE id_paciente = ? AND fecha_final > CURRENT_DATE(); ";
+                
+        boolean resultado = false ;
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id_paciente);
             ResultSet rs = ps.executeQuery();
-
+//            int cantidad = rs.getInt(0);
+//            JOptionPane.showMessageDialog(null, cantidad);
             if (rs.next()) {
+              int cantidad= rs.getInt(1);
+                if (cantidad > 0){
                 resultado = true;
+                }             
             }
+            
             ps.close();
 
         } catch (SQLException ex) {
@@ -110,31 +115,26 @@ public class Dieta_Data {
 
         return resultado;
     }
-    
-    
-    public List<Dieta> listarDietasNoFinalizadas() {
-        List<Dieta> dietas = new ArrayList<>();
+
+    public void finalizarDieta(int id_dieta) {
+        String sql = "UPDATE dieta SET fecha_final= CURRENT_DATE()  WHERE id_dieta= ? ";
+        PreparedStatement ps = null;
         try {
-            String sql = "SELECT * FROM dieta WHERE fecha_final > CURRENT_DATE()";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Dieta dieta = new Dieta();
-                dieta.setId_dieta(rs.getInt("id_dieta"));
-                dieta.setNombre_dieta(rs.getString("nombre_dieta"));
-                Paciente pac=pD.buscarPacientePorId(rs.getInt("id_paciente"));
-                dieta.setPaciente(pac);
-                dieta.setPeso_incial(rs.getDouble("peso_inicial"));
-                dieta.setPeso_final(rs.getDouble("peso_final"));
-                dieta.setFecha_inicial(rs.getDate("fecha_inicial").toLocalDate());
-                dieta.setFecha_final(rs.getDate("fecha_final").toLocalDate());
-                dietas.add(dieta);
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id_dieta);
+
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "DIETA FINALIZADA EXITOSAMENTE");
+            } else {
+                JOptionPane.showMessageDialog(null, "LA DIETA NO EXISTE");
             }
-            ps.close();
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "debe ser un número");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA DIETA" + ex.getMessage());
         }
-        return dietas;
     }
 
     public void modificarDieta(Dieta dieta) {
@@ -158,24 +158,26 @@ public class Dieta_Data {
             } else {
                 JOptionPane.showMessageDialog(null, "LA DIETA NO EXISTE");
             }
-
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA DIETA" + ex.getMessage());
         }
 
     }
 
-    public List<Dieta> listarDietasFinalizadas() {
+    public List<Dieta> listarDietasFinalizadasPorPaciente(int id) {
         List<Dieta> dietas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM dieta WHERE fecha_final > CURRENT_DATE() OR fecha_final != null ";
+            String sql = "SELECT * FROM dieta WHERE id_paciente=? AND fecha_final <= CURRENT_DATE() ";
+
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Dieta dieta = new Dieta();
                 dieta.setId_dieta(rs.getInt("id_dieta"));
                 dieta.setNombre_dieta(rs.getString("nombre_dieta"));
-                Paciente pac=pD.buscarPacientePorId(rs.getInt("id_paciente"));
+                Paciente pac = pD.buscarPacientePorId(rs.getInt("id_paciente"));
                 dieta.setPaciente(pac);
                 dieta.setPeso_incial(rs.getDouble("peso_inicial"));
                 dieta.setPeso_final(rs.getDouble("peso_final"));
@@ -189,12 +191,12 @@ public class Dieta_Data {
         }
         return dietas;
     }
-    
-    public List<Dieta> listarDietasPorPaciente(int id) {
+
+    public List<Dieta> listarDietasNOFinalizadasPorPaciente(int id) {
         List<Dieta> dietas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM dieta WHERE id_paciente=? ";
-            
+            String sql = "SELECT * FROM dieta WHERE id_paciente=? AND fecha_final > CURRENT_DATE() ";
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -202,7 +204,7 @@ public class Dieta_Data {
                 Dieta dieta = new Dieta();
                 dieta.setId_dieta(rs.getInt("id_dieta"));
                 dieta.setNombre_dieta(rs.getString("nombre_dieta"));
-                Paciente pac=pD.buscarPacientePorId(rs.getInt("id_paciente"));
+                Paciente pac = pD.buscarPacientePorId(rs.getInt("id_paciente"));
                 dieta.setPaciente(pac);
                 dieta.setPeso_incial(rs.getDouble("peso_inicial"));
                 dieta.setPeso_final(rs.getDouble("peso_final"));
