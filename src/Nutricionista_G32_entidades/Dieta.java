@@ -16,6 +16,10 @@ public class Dieta {
     public Dieta() {
     }
 
+    public Dieta(int id_dieta) {
+        this.id_dieta = id_dieta;
+    }
+
     public Dieta(int id_dieta, String nombre_dieta, Paciente paciente, double peso_incial, double peso_final, LocalDate fecha_inicial, LocalDate fecha_final) {
         this.id_dieta = id_dieta;
         this.nombre_dieta = nombre_dieta;

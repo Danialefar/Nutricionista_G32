@@ -6,20 +6,20 @@ public class Dieta_Comida {
     private int id_dieta_comida;
     private Comida comida;
     private Dieta dieta;
-    private String tipo_comida;
+    private TiposComida tipo_comida;
     
 
     public Dieta_Comida() {
     }
 
-    public Dieta_Comida(int id_dieta_comida, Comida comida, Dieta dieta, String tipo_comida) {
+    public Dieta_Comida(int id_dieta_comida, Comida comida, Dieta dieta, TiposComida tipo_comida) {
         this.id_dieta_comida = id_dieta_comida;
         this.comida = comida;
         this.dieta = dieta;
         this.tipo_comida = tipo_comida;
     }
 
-    public Dieta_Comida(Comida comida, Dieta dieta, String tipo_comida) {
+    public Dieta_Comida(Comida comida, Dieta dieta, TiposComida tipo_comida) {
         this.comida = comida;
         this.dieta = dieta;
         this.tipo_comida = tipo_comida;
@@ -49,11 +49,11 @@ public class Dieta_Comida {
         this.dieta = dieta;
     }
 
-    public String getTipo_comida() {
+    public TiposComida getTipo_comida() {
         return tipo_comida;
     }
 
-    public void setTipo_comida(String tipo_comida) {
+    public void setTipo_comida(TiposComida tipo_comida) {
         this.tipo_comida = tipo_comida;
     }
 

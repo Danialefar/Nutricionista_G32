@@ -12,6 +12,10 @@ public class Comida {
     public Comida() {
     }
 
+    public Comida(int id_comida) {
+        this.id_comida = id_comida;
+    }
+
     public Comida(int id_comida, String nombre_comida, String detalle_comida, int calorias_comida, boolean estado_comida) {
         this.id_comida = id_comida;
         this.nombre_comida = nombre_comida;
