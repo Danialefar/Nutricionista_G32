@@ -15,10 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Emiliano
- */
+
 public class Dieta_Comida_Data {
     
     public Dieta_Comida_Data() {
