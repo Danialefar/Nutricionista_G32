@@ -59,9 +59,10 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jBcambiarPeso = new javax.swing.JButton();
 
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(580, 590));
+        setTitle("Registro | Consulta Paciente");
+        setPreferredSize(new java.awt.Dimension(596, 450));
 
-        jLabel1.setText("D.N.I Paciente");
+        jLabel1.setText("D.N.I. Paciente");
 
         jBbuscarPac.setText("BUSCAR");
         jBbuscarPac.addActionListener(new java.awt.event.ActionListener() {
@@ -74,11 +75,11 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Fecha Control");
 
-        jLabel4.setText("id. Paciente");
+        jLabel4.setText("Id. Paciente");
 
-        jLabel5.setText("Apellido");
+        jLabel5.setText("Apellido/s");
 
-        jLabel6.setText("Nombre");
+        jLabel6.setText("Nombre/s");
 
         jBmodificarRegistro.setText("MODIFICAR");
         jBmodificarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +107,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "FECHA CONTROL", "PESO CONTROL"
+                "ID", "Fecha Control", "Peso Control"
             }
         ) {
             Class[] types = new Class [] {
@@ -134,7 +135,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
             jThistorial.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jBcambiarPeso.setText("Cambiar Peso");
+        jBcambiarPeso.setText("CAMBIAR PESO");
         jBcambiarPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBcambiarPesoActionPerformed(evt);
@@ -146,57 +147,45 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBbuscarPac))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6))
-                                        .addGap(24, 24, 24)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jTidPac, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(0, 383, Short.MAX_VALUE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jTapellidoPac, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                                                        .addComponent(jTnombrePac))
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTpesoControl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(46, 46, 46)
-                                        .addComponent(jBcambiarPeso))))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTidPac, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jBguardarRegistro)
-                                            .addGap(110, 110, 110)
-                                            .addComponent(jBmodificarRegistro)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jBeliminarRegistro))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTfechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 31, Short.MAX_VALUE)))))
-                .addGap(25, 25, 25))
+                                .addComponent(jTpesoControl, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBcambiarPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTapellidoPac, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                            .addComponent(jTnombrePac)
+                            .addComponent(jTdniBuscar)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(343, 343, 343)
+                                    .addComponent(jBbuscarPac))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(24, 24, 24)
+                                    .addComponent(jTfechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBguardarRegistro)
+                                .addGap(117, 117, 117)
+                                .addComponent(jBmodificarRegistro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBeliminarRegistro))))
+                    .addComponent(jLabel2))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,13 +217,13 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTfechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBguardarRegistro)
-                    .addComponent(jBeliminarRegistro)
-                    .addComponent(jBmodificarRegistro))
-                .addGap(159, 159, 159))
+                    .addComponent(jBmodificarRegistro)
+                    .addComponent(jBeliminarRegistro))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -251,12 +240,12 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
             if (paciente != null) {
                 if (paciente.isEstado() == false) {
-                    JOptionPane.showMessageDialog(null, "EL PACIENTE ESTÁ DADO DE BAJA, DEBERÁ ACTIVARLO NUEVAMENTE ");
+                    JOptionPane.showMessageDialog(null, "El paciente está dado de baja, deberá activarlo nuevamente");
                     jTdniBuscar.setText("");
                         
 
                 } else if (!dD.buscarDietaPorPaciente(paciente.getId_paciente())) {
-                    JOptionPane.showMessageDialog(null, "EL PACIENTE NO TIENE UNA DIETA ASIGNADA, DEBE REGISTRAR UNA DIETA");
+                    JOptionPane.showMessageDialog(null, "El paciente no tiene una dieta asignada, debe registrar una dieta");
                     jBeliminarRegistro.setEnabled(false);
                     jBguardarRegistro.setEnabled(false);
                     jBmodificarRegistro.setEnabled(false);
@@ -304,7 +293,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
 
             }
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO DE DNI VÁLIDO ");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un número de D.N.I. válido ");
         }
 
 
@@ -365,7 +354,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
             borrarFilas();
 
         } else {
-            JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR UN REGISTRO A MODIFICAR");
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un registro a modificar");
         }
 
     }//GEN-LAST:event_jBmodificarRegistroActionPerformed
@@ -381,13 +370,13 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     jTpesoControl.setText("");
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN VALOR NUMÉRICO ENTRE 1 y 500");
+                    JOptionPane.showMessageDialog(this, "Debe ingresar un valor numérico entre 1 y 500");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "SELECCIONE UN HISTORIAL DEL LISTADO");
+                JOptionPane.showMessageDialog(this, "Seleccione un historial del listado");
             }
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NÚMERO");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número");
             jTpesoControl.setText("");
 
         }
@@ -421,7 +410,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
             borrarFilas();
 
         } else {
-            JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR UN REGISTRO A ELIMINAR");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un registro a eliminar");
         }
     }//GEN-LAST:event_jBeliminarRegistroActionPerformed
 

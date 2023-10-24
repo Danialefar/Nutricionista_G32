@@ -45,7 +45,9 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLpaciente = new javax.swing.JLabel();
 
-        jLabel1.setText("DNI del Paciente");
+        setTitle("Consulta Dieta Comida");
+
+        jLabel1.setText("D.N.I. del Paciente");
 
         jBbuscar.setText("BUSCAR");
         jBbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +64,7 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "TIPO", "Peso Inicial", "Fecha Comienzo"
+                "ID", "Tipo", "Peso Inicial", "Fecha de comienzo"
             }
         ) {
             Class[] types = new Class [] {
@@ -95,7 +97,7 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                 {null, null}
             },
             new String [] {
-                "T I P O", "D E T A L L E"
+                "Tipo", "Detalle"
             }
         ) {
             Class[] types = new Class [] {
@@ -121,7 +123,8 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
             jTablaComida.getColumnModel().getColumn(0).setMaxWidth(120);
         }
 
-        jLabel2.setText("C o m i  d a s    I n c l u i d a s   e n   l a    D i e t a     S e l e c c i o n a d a");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Comidas incluidas en la dieta seleccionada");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,23 +134,24 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLpaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLpaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(44, 44, 44)
                                 .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
+                                .addGap(53, 53, 53)
                                 .addComponent(jBbuscar)))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(290, 290, 290))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,14 +162,14 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                     .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBbuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLpaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                .addComponent(jLpaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -182,11 +186,11 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
 
             if (paciente != null) {
                 if (paciente.isEstado() == false) {
-                    JOptionPane.showMessageDialog(null, "EL PACIENTE ESTÁ DADO DE BAJA, DEBERÁ ACTIVARLO NUEVAMENTE ");
+                    JOptionPane.showMessageDialog(null, "El paciente está dado de baja, deberá activarlo nuevamente");
                     jTdniBuscar.setText("");
 
                 } else if (!dD.buscarDietaPorPaciente(paciente.getId_paciente())) {
-                    JOptionPane.showMessageDialog(null, "EL PACIENTE NO TIENE UNA DIETA ASIGNADA, DEBE REGISTRAR UNA DIETA");
+                    JOptionPane.showMessageDialog(null, "El paciente no tiene una dieta asignada, debe registrar una dieta");
 
                     jTdniBuscar.setText("");
                 } else {
@@ -211,7 +215,7 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                 }
             }
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO DE DNI VÁLIDO ");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un número de D.N.I. válido");
             jTdniBuscar.setText("");
         }
     }//GEN-LAST:event_jBbuscarActionPerformed

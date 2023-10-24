@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuPaciente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="MenuPaciente"/>
+                <Property name="text" type="java.lang.String" value="Men&#xfa; Paciente"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuPacienteActionPerformed"/>
@@ -19,7 +19,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMregistroConsulta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="RegistroConsulta"/>
+                <Property name="text" type="java.lang.String" value="Registro | Consulta Paciente"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMregistroConsultaActionPerformed"/>
@@ -34,7 +34,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuComida">
               <Properties>
-                <Property name="text" type="java.lang.String" value="MenuComida"/>
+                <Property name="text" type="java.lang.String" value="Men&#xfa; Comida"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuComidaActionPerformed"/>
@@ -42,7 +42,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMlistarComidas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ListaComida"/>
+                <Property name="text" type="java.lang.String" value="Lista Comida"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -54,7 +54,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuDieta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="MenuDieta"/>
+                <Property name="text" type="java.lang.String" value="Men&#xfa; Dieta"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuDietaActionPerformed"/>
@@ -62,7 +62,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMConsultaDieta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta"/>
+                <Property name="text" type="java.lang.String" value="Consulta Dieta"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMConsultaDietaActionPerformed"/>
@@ -72,12 +72,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="DietaComida"/>
+            <Property name="text" type="java.lang.String" value="Dieta Comida"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuDietaComida">
               <Properties>
-                <Property name="text" type="java.lang.String" value="MenuDieta"/>
+                <Property name="text" type="java.lang.String" value="Men&#xfa; Dieta Comida"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuDietaComidaActionPerformed"/>
@@ -85,7 +85,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMConsDietaComida">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consultas"/>
+                <Property name="text" type="java.lang.String" value="Consulta Dieta Comida"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMConsDietaComidaActionPerformed"/>
@@ -119,12 +119,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="escritorio" alignment="0" pref="400" max="32767" attributes="0"/>
+          <Component id="escritorio" alignment="0" pref="900" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="escritorio" alignment="0" pref="277" max="32767" attributes="0"/>
+          <Component id="escritorio" alignment="0" pref="600" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -143,12 +143,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="900" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="277" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

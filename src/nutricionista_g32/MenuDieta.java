@@ -54,20 +54,21 @@ public class MenuDieta extends javax.swing.JInternalFrame {
         jCBnombreDieta = new javax.swing.JComboBox<>();
 
         setClosable(true);
+        setTitle("Menú Dieta");
 
-        jLabel1.setText("DNI Paciente");
+        jLabel1.setText("D.N.I. del Paciente");
 
         jLabel2.setText("Paciente");
 
         jLabel3.setText("Peso Inicial");
 
-        jLabel4.setText("Peso Objetivo a Alcanzar");
+        jLabel4.setText("Peso objetivo a alcanzar");
 
-        jLabel5.setText("Fecha Inicio");
+        jLabel5.setText("Fecha de inicio");
 
-        jLabel6.setText("Fecha Finalizaciòn Estimada");
+        jLabel6.setText("Fecha de finalizaciòn estimada");
 
-        jLabel7.setText("Duración en Semanas");
+        jLabel7.setText("Duración en semanas");
 
         jTdniBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -98,9 +99,14 @@ public class MenuDieta extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel8.setText("Nombre de DIETA");
+        jLabel8.setText("Nombre de dieta");
 
-        jCBnombreDieta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "elija el nombre", "DIETA KETO", "DIETA MEDITERRÁNEA", "DIETA CALÓRICA", "DIETA VEGANA", "DIETA VEGETARIANA", "DIETA DASH", "DIETA ORNISH", "DIETA D.M.A", " " }));
+        jCBnombreDieta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el nombre", "Dieta KETO", "Dieta MEDITERRÁNEA", "Dieta CALÓRICA", "Dieta VEGANA", "Dieta VEGETARIANA", "Dieta DASH", "Dieta ORNISH", "Dieta D.M.A." }));
+        jCBnombreDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBnombreDietaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,28 +123,23 @@ public class MenuDieta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel6)
                     .addComponent(jLabel8))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTpaciente)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTpesoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                                        .addComponent(jTpesoFinal)
-                                        .addComponent(jTfechaInicio)
-                                        .addComponent(jTsemanas)
-                                        .addComponent(jTfechaFinal))
-                                    .addGap(49, 49, 49)
-                                    .addComponent(jRbuscar)
-                                    .addGap(31, 31, 31))
-                                .addComponent(jCBnombreDieta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 28, Short.MAX_VALUE)))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTdniBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTpesoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(jTpesoFinal)
+                            .addComponent(jTfechaInicio)
+                            .addComponent(jTsemanas)
+                            .addComponent(jTfechaFinal))
+                        .addGap(49, 49, 49)
+                        .addComponent(jRbuscar)
+                        .addGap(31, 31, 31))
+                    .addComponent(jCBnombreDieta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTpaciente))
+                .addGap(22, 22, 22)
                 .addComponent(jTidDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -179,9 +180,9 @@ public class MenuDieta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(jTidDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBnombreDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(jBguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jBguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -254,6 +255,10 @@ public class MenuDieta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NUMERO VALIDO");
         }
     }//GEN-LAST:event_jBguardarActionPerformed
+
+    private void jCBnombreDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBnombreDietaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBnombreDietaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

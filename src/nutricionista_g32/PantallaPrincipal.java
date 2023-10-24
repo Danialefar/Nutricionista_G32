@@ -57,16 +57,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Paciente");
 
-        jMenuPaciente.setText("MenuPaciente");
+        jMenuPaciente.setText("Menú Paciente");
         jMenuPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuPacienteActionPerformed(evt);
@@ -74,7 +74,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuPaciente);
 
-        jMregistroConsulta.setText("RegistroConsulta");
+        jMregistroConsulta.setText("Registro | Consulta Paciente");
         jMregistroConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMregistroConsultaActionPerformed(evt);
@@ -86,7 +86,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Comida");
 
-        jMenuComida.setText("MenuComida");
+        jMenuComida.setText("Menú Comida");
         jMenuComida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuComidaActionPerformed(evt);
@@ -94,14 +94,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuComida);
 
-        jMlistarComidas.setText("ListaComida");
+        jMlistarComidas.setText("Lista Comida");
         jMenu2.add(jMlistarComidas);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Dieta");
 
-        jMenuDieta.setText("MenuDieta");
+        jMenuDieta.setText("Menú Dieta");
         jMenuDieta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuDietaActionPerformed(evt);
@@ -109,7 +109,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuDieta);
 
-        jMConsultaDieta.setText("Consulta");
+        jMConsultaDieta.setText("Consulta Dieta");
         jMConsultaDieta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMConsultaDietaActionPerformed(evt);
@@ -119,9 +119,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("DietaComida");
+        jMenu4.setText("Dieta Comida");
 
-        jMenuDietaComida.setText("MenuDieta");
+        jMenuDietaComida.setText("Menú Dieta Comida");
         jMenuDietaComida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuDietaComidaActionPerformed(evt);
@@ -129,7 +129,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuDietaComida);
 
-        jMConsDietaComida.setText("Consultas");
+        jMConsDietaComida.setText("Consulta Dieta Comida");
         jMConsDietaComida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMConsDietaComidaActionPerformed(evt);
@@ -145,11 +145,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -220,7 +220,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(cdc);
     }//GEN-LAST:event_jMConsDietaComidaActionPerformed
 
-    /**
+    /**,
      * @param args the command line arguments
      */
     public static void main(String args[]) {

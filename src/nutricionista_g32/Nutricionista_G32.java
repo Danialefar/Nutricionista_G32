@@ -10,15 +10,21 @@ import java.sql.Connection;
 public class Nutricionista_G32 {
 
     public static void main(String[] args) {
+        
+        PantallaPrincipal prin = new PantallaPrincipal();
+        prin.setVisible(true);
+        prin.setLocationRelativeTo(null);
 
         Connection con = Conexion.getConexion();
-
+              
+        
         Paciente p1 = new Paciente(1, "FARIAS CORVALAN", "JUAN MANUEL", 33250000,
                 "JUAN JOSE PASO Nº542 Bº CIUDADELA - CORDOBA", "3517885544", true);
         Paciente_Data pD = new Paciente_Data();
 //        pD.guardarPaciente(p1);
 //        pD.buscarPacientePorDni(33254110);
 //        pD.modificarPaciente(p1);
+///////........
 
         Comida d1 = new Comida(1, "INFUSION + FRUTA", "INFUSION CON EDULCORANTE + 2 RODAJAS DE PAN LACTAL CON MERMELADA O QUESO", 70, true);
         Comida d2 = new Comida(2, "YOGUT CON CEREAL", "YOGURT DESCREMADO CON 2 CUCHARADAS DE AVENA Y 1 DE PASAS DE CEREALES + 1 FRUTA", 80, true);

@@ -52,15 +52,15 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
         jTidPaciente = new javax.swing.JTextField();
 
         setClosable(true);
-        setForeground(java.awt.Color.orange);
-        setTitle("MENU PACIENTE");
+        setForeground(new java.awt.Color(0, 0, 255));
+        setTitle("Menú Paciente");
         setPreferredSize(new java.awt.Dimension(596, 396));
 
-        jLabel1.setText("DNI");
+        jLabel1.setText("D.N.I.");
 
-        jLabel2.setText("Apellido");
+        jLabel2.setText("Apellido/s");
 
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Nombre/s");
 
         jLabel4.setText("Dirección");
 
@@ -70,7 +70,7 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setText("Telefono");
+        jLabel5.setText("Teléfono");
 
         jTnroTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel7.setText("(calle - altura - barrio - ciudad - provincia)");
+        jLabel7.setText("(Calle - Altura - Barrio - Ciudad - Provincia)");
 
         jBguardar.setText("GUARDAR");
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,45 +131,47 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTdireccion, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jTnroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBguardar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-                                .addComponent(jTidPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTnombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTdni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jRestado, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTapellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(80, 80, 80))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(332, 431, Short.MAX_VALUE))
+                        .addGap(332, 530, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBbuscar)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jBnuevo)
-                        .addGap(33, 33, 33)
-                        .addComponent(jBmodificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBeliminar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTdireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel7)
+                                                    .addComponent(jTnroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jBguardar))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                                                .addComponent(jTidPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jTnombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTdni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jRestado, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jTapellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jBmodificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBeliminar)))
                         .addGap(34, 34, 34))))
         );
         layout.setVerticalGroup(
@@ -212,7 +214,7 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
                     .addComponent(jBmodificar)
                     .addComponent(jBeliminar)
                     .addComponent(jBguardar))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,11 +257,11 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
 
             if (jTapellido.getText().isEmpty() || jTnombre.getText().isEmpty() || jTdireccion.getText().isEmpty()
                     || jTnroTelefono.getText().isEmpty() || jTdni.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "NINGUN CAMPO PUEDE ESTAR VACÍO");
+                JOptionPane.showMessageDialog(null, "Ningún campo puede estar vacío");
             } else if (Integer.parseInt(jTdni.getText()) < 1000000 || Integer.parseInt(jTdni.getText()) > 60000000) {
-                JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN DNI VÁLIDO");
+                JOptionPane.showMessageDialog(null, "Debe ingresar un D.N.I. válido");
             } else if (jTnroTelefono.getText().length() != 10) {
-                JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN TELEFONO VÁLIDO");
+                JOptionPane.showMessageDialog(null, "Debe ingresar un teléfono válido");
             } else {
 
                 Paciente paciente = new Paciente(jTapellido.getText(), jTnombre.getText(), Integer.parseInt(jTdni.getText()), jTdireccion.getText(), jTnroTelefono.getText(), jRestado.isSelected());
@@ -286,7 +288,7 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
             }
 
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO VÁLIDO");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
         }
 
     }//GEN-LAST:event_jBguardarActionPerformed
@@ -318,13 +320,13 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
                 }
             }
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN NÚMERO DE DNI VÁLIDO ");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un número de D.N.I. válido");
         }
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
         if (jRestado.isSelected() == false) {
-            JOptionPane.showMessageDialog(null, "EL PACIENTE YA ESTÁ DADO DE BAJA");
+            JOptionPane.showMessageDialog(null, "El paciente está dado de baja");
             jTdni.setText("");
             jTapellido.setText("");
             jTnombre.setText("");
@@ -367,7 +369,7 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
                 jTnroTelefono.setText("");
 
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "EL DNI INGRESADO NO ES VÁLIDO ");
+                JOptionPane.showMessageDialog(null, "El D.N.I. ingresado no es válido");
             }
         }
     }//GEN-LAST:event_jBeliminarActionPerformed
@@ -388,11 +390,11 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
             }
             if (jTapellido.getText().isEmpty() || jTnombre.getText().isEmpty() || jTdireccion.getText().isEmpty()
                     || jTnroTelefono.getText().isEmpty() || jTdni.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "NINGUN CAMPO PUEDE ESTAR VACÍO");
+                JOptionPane.showMessageDialog(null, "Ningún campo puede estar vacío");
             } else if (dni < 1000000 || dni > 60000000) {
-                JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN DNI VÁLIDO");
+                JOptionPane.showMessageDialog(null, "Debe ingresar un D.N.I. válido");
             } else if (jTnroTelefono.getText().length() != 10) {
-                JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN TELEFONO VÁLIDO");
+                JOptionPane.showMessageDialog(null, "Debe ingresar un teléfono válido");
             } else {
                 Paciente paciente = new Paciente(id, apellido, nombre, dni, direccion, telefono, est);
                 Paciente_Data pD = new Paciente_Data();
@@ -418,7 +420,7 @@ public class MenuPaciente extends javax.swing.JInternalFrame {
                 jTnroTelefono.setText("");
             }
             }catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "DEBE INGRESAR UN DNI VÁLIDO ");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un D.N.I. válido");
         }
     }//GEN-LAST:event_jBmodificarActionPerformed
 
