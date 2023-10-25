@@ -5,9 +5,11 @@
  */
 package nutricionista_g32;
 
+import Nutricionista_G32_accesoDatos.Dieta_Comida_Data;
 import Nutricionista_G32_accesoDatos.Dieta_Data;
 import Nutricionista_G32_accesoDatos.Paciente_Data;
 import Nutricionista_G32_entidades.Dieta;
+import Nutricionista_G32_entidades.Dieta_Comida;
 import Nutricionista_G32_entidades.Paciente;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
@@ -45,6 +47,7 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLpaciente = new javax.swing.JLabel();
 
+        setClosable(true);
         setTitle("Consulta Dieta Comida");
 
         jLabel1.setText("D.N.I. del Paciente");
@@ -71,7 +74,7 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -82,11 +85,16 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTablaDieta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablaDietaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablaDieta);
         if (jTablaDieta.getColumnModel().getColumnCount() > 0) {
-            jTablaDieta.getColumnModel().getColumn(0).setMinWidth(0);
-            jTablaDieta.getColumnModel().getColumn(0).setPreferredWidth(0);
-            jTablaDieta.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTablaDieta.getColumnModel().getColumn(0).setMinWidth(30);
+            jTablaDieta.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTablaDieta.getColumnModel().getColumn(0).setMaxWidth(30);
         }
 
         jTablaComida.setModel(new javax.swing.table.DefaultTableModel(
@@ -180,6 +188,8 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
         Paciente paciente = new Paciente();
         Dieta_Data dD = new Dieta_Data();
         borrarFilas();
+        borrarFilas1();
+        jTablaDieta.setEnabled(true);
         try {
             int dni = Integer.parseInt(jTdniBuscar.getText());
             paciente = pD.buscarPacientePorDni(dni);
@@ -202,7 +212,7 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
                             dieta.getNombre_dieta(),
                             dieta.getPeso_incial(),
                             dieta.getFecha_inicial(),});
-
+                            jLpaciente.setEnabled(true);
                     }
                     for (Dieta dieta1 : dD.listarDietasFinalizadasPorPaciente(id)) {
                         modelo.addRow(new Object[]{
@@ -219,6 +229,26 @@ public class ConsultaDietaComida extends javax.swing.JInternalFrame {
             jTdniBuscar.setText("");
         }
     }//GEN-LAST:event_jBbuscarActionPerformed
+
+    private void jTablaDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaDietaMouseClicked
+        borrarFilas1();
+        int filaSelec = jTablaDieta.getSelectedRow();
+        int id = Integer.parseInt(jTablaDieta.getValueAt(filaSelec, 0) + "");
+        Dieta_Comida_Data dcD = new Dieta_Comida_Data();
+
+        if (filaSelec != -1) {
+            if(dcD.buscarDietaExistente(id)==true){
+            for (Dieta_Comida dC : dcD.listarDetalleComidas(id)) {
+                model.addRow(new Object[]{
+                    dC.getTipo_comida(),
+                    dC.getComida().getDetalle_comida(),});
+            }
+        }else{
+              JOptionPane.showMessageDialog(null, "El paciente no tiene asignado comidas a su Dieta"+'\n'
+                      + "Debe cargar el Menu Dieta Comida ");  
+            }
+        }
+    }//GEN-LAST:event_jTablaDietaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -253,4 +283,10 @@ private void vistaA() {
         }
     }
 
+    private void borrarFilas1() {
+        int f = jTablaComida.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            model.removeRow(f);
+        }
+    }
 }

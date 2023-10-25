@@ -5,17 +5,18 @@
  */
 package nutricionista_g32;
 
-/**
- *
- * @author vvted
- */
+import Nutricionista_G32_accesoDatos.Comida_Data;
+import Nutricionista_G32_entidades.Comida;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class ListaMenu extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListaMenu
-     */
+    private DefaultTableModel modelo;
+
     public ListaMenu() {
         initComponents();
+        modelo = (DefaultTableModel) jTablaComida.getModel();
     }
 
     /**
@@ -27,21 +28,152 @@ public class ListaMenu extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTcalMin = new javax.swing.JTextField();
+        jTcalMax = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jBbuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablaComida = new javax.swing.JTable();
+
+        setClosable(true);
+        setTitle("LISTADO DE COMIDAS POR CALORÌAS");
+
+        jLabel1.setText("Ingrese las calorías Mínimas");
+
+        jLabel2.setText("Ingrese las Calorías Máximas");
+
+        jBbuscar.setText("BUSCAR");
+        jBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarActionPerformed(evt);
+            }
+        });
+
+        jTablaComida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Descripción", "Calorías"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTablaComida);
+        if (jTablaComida.getColumnModel().getColumnCount() > 0) {
+            jTablaComida.getColumnModel().getColumn(0).setMinWidth(100);
+            jTablaComida.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTablaComida.getColumnModel().getColumn(0).setMaxWidth(100);
+            jTablaComida.getColumnModel().getColumn(1).setMinWidth(400);
+            jTablaComida.getColumnModel().getColumn(1).setPreferredWidth(400);
+            jTablaComida.getColumnModel().getColumn(1).setMaxWidth(240);
+            jTablaComida.getColumnModel().getColumn(2).setMinWidth(80);
+            jTablaComida.getColumnModel().getColumn(2).setPreferredWidth(80);
+            jTablaComida.getColumnModel().getColumn(2).setMaxWidth(80);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTcalMax, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(jTcalMin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBbuscar)
+                .addGap(35, 35, 35))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTcalMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTcalMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jBbuscar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+        borrarFilas();
+        try {
+        int calMin = Integer.parseInt(jTcalMin.getText());
+        int calMax = Integer.parseInt(jTcalMax.getText());
+        Comida_Data cD = new Comida_Data();
+
+        if (calMin < 0 || calMax > 5000) {
+            JOptionPane.showMessageDialog(this, "El valor para calorías debe estar entre 0 y 5000");
+        }else if(calMin > calMax ){
+            JOptionPane.showMessageDialog(this, "El valor de Calorías Mínimas no puede ser mayor a la de Calorías Máximas");
+        } else {
+            for (Comida comid : cD.listarComidasPorCalorias(calMin, calMax)) {
+                modelo.addRow(new Object[]{
+                    comid.getNombre_comida(),
+                    comid.getDetalle_comida(),
+                    comid.getCalorias_comida(),});
+            }
+        }
+        } catch (NumberFormatException nfe) {
+         JOptionPane.showMessageDialog(this, "Campo de Calorías vacío o el valor ingresado NO un número");
+        }
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBbuscar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTablaComida;
+    private javax.swing.JTextField jTcalMax;
+    private javax.swing.JTextField jTcalMin;
     // End of variables declaration//GEN-END:variables
+
+     private void borrarFilas() {
+        int f = jTablaComida.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+
 }

@@ -26,18 +26,19 @@ import javax.swing.table.DefaultTableModel;
  * @author vvted
  */
 public class MenuDietaComida extends javax.swing.JInternalFrame {
-      private final DefaultTableModel modelo = new DefaultTableModel() {
+
+    private final DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
-      
+
     /**
      * Creates new form MenuDietaComida
      */
     public MenuDietaComida() {
-  
+
         initComponents();
         armarCabecera();
         for (TiposComida cate : TiposComida.values()) {
@@ -240,7 +241,8 @@ public class MenuDietaComida extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
-      Paciente_Data pD = new Paciente_Data();
+        jTplan.setText("");
+        Paciente_Data pD = new Paciente_Data();
         Paciente paciente = new Paciente();
         Dieta_Data dD = new Dieta_Data();
         try {
@@ -251,11 +253,10 @@ public class MenuDietaComida extends javax.swing.JInternalFrame {
                 if (paciente.isEstado() == false) {
                     JOptionPane.showMessageDialog(null, "El paciente está dado de baja, deberá activarlo nuevamente");
                     jTdni.setText("");
-                        
 
                 } else if (!dD.buscarDietaPorPaciente(paciente.getId_paciente())) {
                     JOptionPane.showMessageDialog(null, "El paciente no tiene una dieta asignada, debe registrar una dieta");
-                   
+
                     jTdni.setText("");
                 } else {
                     jTplan.setEnabled(true);
@@ -265,14 +266,13 @@ public class MenuDietaComida extends javax.swing.JInternalFrame {
                     jTcomida.setEnabled(true);
                     jBseleccionar.setEnabled(true);
                     jBfinalizar.setEnabled(true);
-                    jLnombre.setText(paciente.getApellido_paciente()+" " +paciente.getNombre_paciente());
-                    for(Dieta d:dD.listarDietasNOFinalizadasPorPaciente(paciente.getId_paciente())){
+                    jLnombre.setText(paciente.getApellido_paciente() + " " + paciente.getNombre_paciente());
+                    for (Dieta d : dD.listarDietasNOFinalizadasPorPaciente(paciente.getId_paciente())) {
                         jLtipoDieta.setText(d.getNombre_dieta());
-                        jLidDieta.setText(d.getId_dieta()+"");
-                        
+                        jLidDieta.setText(d.getId_dieta() + "");
+
                     }
-                    
-                  
+
                 }
 
             }
@@ -303,31 +303,31 @@ public class MenuDietaComida extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jChorarioActionPerformed
 
     private void jBseleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBseleccionarActionPerformed
-        
+
         //**** INSERT EN LA TABLA
         int filaSelec = jTcomida.getSelectedRow();
-        
-        if ((filaSelec != -1) && (jTbuscarComida.getText()!=null)) {
-        
-        int iddieta=Integer.parseInt(jLidDieta.getText());
-        int idcomida=(int) modelo.getValueAt(filaSelec, 0);
-        Comida comida=new Comida(idcomida);
-        Dieta dieta=new Dieta(iddieta);
-        TiposComida tipo=(TiposComida) jChorario.getSelectedItem();
-        Dieta_Comida dc=new Dieta_Comida(comida,dieta,tipo);
-        Dieta_Comida_Data dcd=new Dieta_Comida_Data();
-        dcd.guardarDietaComida(dc);
-        //********
-        
-        String detalle=modelo.getValueAt(filaSelec, 3)+"";
-        
-        jTplan.setText(jTplan.getText()+tipo+ ": "+detalle +'\n'+"- - - - - - - - - - - - - - - - - - - -"+'\n');
-        
-        jTbuscarComida.setText("");
-        borrarFilas();
-        }else {
+
+        if ((filaSelec != -1) && (jTbuscarComida.getText() != null)) {
+
+            int iddieta = Integer.parseInt(jLidDieta.getText());
+            int idcomida = (int) modelo.getValueAt(filaSelec, 0);
+            Comida comida = new Comida(idcomida);
+            Dieta dieta = new Dieta(iddieta);
+            TiposComida tipo = (TiposComida) jChorario.getSelectedItem();
+            Dieta_Comida dc = new Dieta_Comida(comida, dieta, tipo);
+            Dieta_Comida_Data dcd = new Dieta_Comida_Data();
+            dcd.guardarDietaComida(dc);
+            //********
+
+            String detalle = modelo.getValueAt(filaSelec, 3) + "";
+
+            jTplan.setText(jTplan.getText() + tipo + ": " + detalle + '\n' + "- - - - - - - - - - - - - - - - - - - -" + '\n');
+
+            jTbuscarComida.setText("");
+            borrarFilas();
+        } else {
             JOptionPane.showMessageDialog(null, "No selecciono una comida");
-        }      
+        }
     }//GEN-LAST:event_jBseleccionarActionPerformed
 
     private void jBfinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinalizarActionPerformed

@@ -98,6 +98,31 @@ public class Comida_Data {
         return comidas;
     }
 
+    public List<Comida> listarComidasPorCalorias(int calMin , int calMax) {
+        List<Comida> comida1 = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM comida WHERE estado_comida=1 AND calorias_comida BETWEEN ? AND ? ORDER BY calorias_comida ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, calMin);
+            ps.setInt(2, calMax);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Comida comida = new Comida();
+                comida.setId_comida(rs.getInt("id_comida"));
+                comida.setNombre_comida(rs.getString("nombre_comida"));
+                comida.setDetalle_comida(rs.getString("detalle_comida"));
+                comida.setCalorias_comida(rs.getInt("calorias_comida"));
+                comida.setEstado_comida(rs.getBoolean("estado_comida"));
+                comida1.add(comida);
+            }
+           ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA COMIDA" + ex.getMessage());
+        }
+        return comida1;
+    }
+    
     public void modificarComida(Comida comida) {
         String sql = "UPDATE comida SET nombre_comida=?, detalle_comida=?, calorias_comida=? "
                 + " WHERE id_comida=? ";

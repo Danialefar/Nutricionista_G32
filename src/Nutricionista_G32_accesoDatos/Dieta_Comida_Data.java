@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Nutricionista_G32_accesoDatos;
 
 import Nutricionista_G32_entidades.Comida;
@@ -62,7 +58,7 @@ public class Dieta_Comida_Data {
             String sql = "SELECT * FROM dieta_comida, comida, dieta "
                     + "WHERE dieta_comida.id_dieta=? "
                     + "AND dieta.id_dieta=? "
-                    + "AND dieta_comida.id_comida=comida.id_comida";
+                    + "AND dieta_comida.id_comida=comida.id_comida ORDER BY id_dieta_comida ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.setInt(2, id);
@@ -99,5 +95,33 @@ public class Dieta_Comida_Data {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA COMIDA" + ex.getMessage());
         }
         return dietaCom;
+    }
+     
+      public boolean buscarDietaExistente(int id_dieta) {
+
+        String sql = "SELECT COUNT(*) AS CANTIDAD FROM dieta_comida WHERE id_dieta = ? ";
+                
+        boolean resultado = false ;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id_dieta);
+            ResultSet rs = ps.executeQuery();
+//            int cantidad = rs.getInt(0);
+//            JOptionPane.showMessageDialog(null, cantidad);
+            if (rs.next()) {
+              int cantidad= rs.getInt(1);
+                if (cantidad > 0){
+                resultado = true;
+                }             
+            }
+            
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA DIETA_COMIDA" + ex.getMessage());
+        }
+
+        return resultado;
     }
 }
