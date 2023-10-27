@@ -240,7 +240,7 @@ public class Dieta_Data {
                 reporte.setPaciente(paciente);
                 reporte.setPesoObjetivo(rs.getDouble("peso_final"));
                 reporte.setUltimoPesoRegistro(rs.getDouble("peso_registro"));
-                reporte.setDiferencia(rs.getDouble("peso_final") - rs.getDouble("peso_registro"));
+                reporte.setDiferencia(Math.abs(Math.round(rs.getDouble("peso_final") - rs.getDouble("peso_registro"))));
                 reportes.add(reporte);
             }
             ps.close();
@@ -271,7 +271,7 @@ public class Dieta_Data {
                 reporte.setPaciente(paciente);
                 reporte.setPesoObjetivo(rs.getDouble("peso_final"));
                 reporte.setUltimoPesoRegistro(rs.getDouble("peso_registro"));
-                reporte.setDiferencia(rs.getDouble("peso_final") - rs.getDouble("peso_registro"));
+                reporte.setDiferencia(Math.abs(Math.round(rs.getDouble("peso_final") - rs.getDouble("peso_registro"))));
                 reportes1.add(reporte);
             }
             ps.close();

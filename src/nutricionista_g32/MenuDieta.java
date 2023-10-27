@@ -7,9 +7,11 @@ package nutricionista_g32;
 
 import Nutricionista_G32_accesoDatos.Comida_Data;
 import Nutricionista_G32_accesoDatos.Dieta_Data;
+import Nutricionista_G32_accesoDatos.Historial_Data;
 import Nutricionista_G32_accesoDatos.Paciente_Data;
 import Nutricionista_G32_entidades.Comida;
 import Nutricionista_G32_entidades.Dieta;
+import Nutricionista_G32_entidades.Historial;
 import Nutricionista_G32_entidades.Paciente;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -101,7 +103,7 @@ public class MenuDieta extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Nombre de dieta");
 
-        jCBnombreDieta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el nombre", "Dieta KETO", "Dieta MEDITERRÁNEA", "Dieta CALÓRICA", "Dieta VEGANA", "Dieta VEGETARIANA", "Dieta DASH", "Dieta ORNISH", "Dieta D.M.A." }));
+        jCBnombreDieta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el nombre", "DIETA KETO", "DIETA MEDITERRANEA", "DIETA CALORICA", "DIETA VEGANA", "DIETA VEGETARIANA", "DIETA DASH", "DIETA ORNISH", "DIETA D.M.A." }));
         jCBnombreDieta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBnombreDietaActionPerformed(evt);
@@ -247,7 +249,13 @@ public class MenuDieta extends javax.swing.JInternalFrame {
                 Dieta dieta = new Dieta(jCBnombreDieta.getSelectedItem().toString(),
                         paciente, pesoInicial, pesoFinal, LocalDate.now(),
                         LocalDate.now().plusDays(Integer.parseInt(jTsemanas.getText()) * 7));
+
                 dD.guardarDieta(dieta);
+
+                Historial registro = new Historial(paciente, Double.parseDouble(jTpesoInicio.getText()), LocalDate.now());
+                Historial_Data hD = new Historial_Data();
+                hD.guardarHistorial(registro);
+
                 vista1();
             }
 

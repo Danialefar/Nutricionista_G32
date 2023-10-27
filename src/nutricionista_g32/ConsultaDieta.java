@@ -143,7 +143,7 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
             }
         });
 
-        jCBnombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el nombre", "Dieta KETO", "Dieta MEDITERRÁNEA", "Dieta CALÓRICA", "Dieta VEGANA", "Dieta VEGETARIANA", "Dieta DASH", "Dieta ORNISH", "Dieta D.M.A." }));
+        jCBnombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el nombre", "DIETA KETO", "DIETA MEDITERRANEA", "DIETA CALORICA", "DIETA VEGANA", "DIETA VEGETARIANA", "DIETA DASH", "DIETA ORNISH", "DIETA D.M.A." }));
 
         jTdietaFinalizada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -255,12 +255,13 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTpesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jTfechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBmodificar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTpesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(jTfechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBmodificar)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTpesoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,7 +295,7 @@ public class ConsultaDieta extends javax.swing.JInternalFrame {
 
     private void jTdietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTdietaMouseClicked
         int filaSelec = jTdieta.getSelectedRow();
-        int opc = resultadoOpcion(modelo.getValueAt(filaSelec, 1) + "");
+        int opc = resultadoOpcion((modelo.getValueAt(filaSelec, 1) + "").toUpperCase());
         if (filaSelec != -1) {
             jTpesoInicial.setText(modelo.getValueAt(filaSelec, 3) + "");
             jTpesoFinal.setText(modelo.getValueAt(filaSelec, 4) + "");
@@ -411,10 +412,10 @@ private void armarCabecera() {
             case "DIETA KETO":
                 resultado = 1;
                 break;
-            case "DIETA MEDITERRÁNEA":
+            case "DIETA MEDITERRANEA":
                 resultado = 2;
                 break;
-            case "DIETA CALÓRICA":
+            case "DIETA CALORICA":
                 resultado = 3;
                 break;
             case "DIETA VEGANA":
@@ -429,7 +430,7 @@ private void armarCabecera() {
             case "DIETA ORNISH":
                 resultado = 7;
                 break;
-            case "DIETA D.M.A ":
+            case "DIETA D.M.A.":
                 resultado = 8;
                 break;
 

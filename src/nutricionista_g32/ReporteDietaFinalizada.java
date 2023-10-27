@@ -79,7 +79,7 @@ public class ReporteDietaFinalizada extends javax.swing.JInternalFrame {
             jTablaReporteBP.getColumnModel().getColumn(0).setMaxWidth(350);
         }
 
-        jLabel1.setText("Listado de Dietas para Bajar de Peso");
+        jLabel1.setText("Listado de Dietas para Bajar de Peso  NO ALCANZADAS");
 
         jTablaReporteSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,7 +107,7 @@ public class ReporteDietaFinalizada extends javax.swing.JInternalFrame {
             jTablaReporteSP.getColumnModel().getColumn(0).setMaxWidth(350);
         }
 
-        jLabel2.setText("Listado de Dietas para Subir de Peso");
+        jLabel2.setText("Listado de Dietas para Subir de Peso  NO ALCANZADAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

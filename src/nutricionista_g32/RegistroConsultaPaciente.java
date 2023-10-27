@@ -31,6 +31,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jTidPac.setEnabled(false);
         jThistorial.setEnabled(false);
         jBcambiarPeso.setEnabled(false);
+        jBcambiarPeso.setEnabled(false);
 
     }
 
@@ -57,6 +58,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jThistorial = new javax.swing.JTable();
         jBcambiarPeso = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Registro | Consulta Paciente");
@@ -126,6 +128,11 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
             }
         });
         jThistorial.getTableHeader().setReorderingAllowed(false);
+        jThistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jThistorialMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jThistorial);
         if (jThistorial.getColumnModel().getColumnCount() > 0) {
             jThistorial.getColumnModel().getColumn(0).setMinWidth(0);
@@ -141,6 +148,8 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                 jBcambiarPesoActionPerformed(evt);
             }
         });
+
+        jLabel7.setText("Seleccione un Registro para MODIFICAR o ELIMINAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +194,11 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBeliminarRegistro))))
                     .addComponent(jLabel2))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +231,9 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     .addComponent(jTfechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBguardarRegistro)
                     .addComponent(jBmodificarRegistro)
@@ -263,9 +278,9 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     jTdniBuscar.setText("");
                 } else {
 
-                    jBeliminarRegistro.setEnabled(true);
+                    jBeliminarRegistro.setEnabled(false);
                     jBguardarRegistro.setEnabled(true);
-                    jBmodificarRegistro.setEnabled(true);
+                    jBmodificarRegistro.setEnabled(false);
                     jTfechaActual.setEnabled(true);
                     jTfechaActual.setEditable(false);
                     jTfechaActual.setText(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
@@ -273,7 +288,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                     jTnombrePac.setEnabled(true);
                     jTpesoControl.setEnabled(true);
                     jTidPac.setEnabled(false);
-                    jBcambiarPeso.setEnabled(true);
+                    jBcambiarPeso.setEnabled(false);
                     jTapellidoPac.setText(paciente.getApellido_paciente());
                     jTnombrePac.setText(paciente.getNombre_paciente());
                     jTidPac.setText(paciente.getId_paciente() + "");
@@ -306,6 +321,9 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         LocalDate fecha = LocalDate.now();
         Historial registro = new Historial(pac, Double.parseDouble(jTpesoControl.getText()), fecha);
         Historial_Data hD = new Historial_Data();
+        
+        
+        
         hD.guardarHistorial(registro);
 
         jBeliminarRegistro.setEnabled(false);
@@ -345,6 +363,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
             jTpesoControl.setEnabled(false);
             jTidPac.setEnabled(false);
             jThistorial.setEnabled(false);
+            jBcambiarPeso.setEnabled(false);
             jTfechaActual.setText("");
             jTapellidoPac.setText("");
             jTnombrePac.setText("");
@@ -368,7 +387,9 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
                 if (peso >= 1 && peso <= 500) {
                     modelo.setValueAt(jTpesoControl.getText(), jThistorial.getSelectedRow(), 2);
                     jTpesoControl.setText("");
-
+                    jBmodificarRegistro.setEnabled(true);
+                    jBguardarRegistro.setEnabled(false);
+                    jBeliminarRegistro.setEnabled(false);
                 } else {
                     JOptionPane.showMessageDialog(this, "Debe ingresar un valor numérico entre 1 y 500");
                 }
@@ -414,6 +435,12 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBeliminarRegistroActionPerformed
 
+    private void jThistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jThistorialMouseClicked
+        jBcambiarPeso.setEnabled(true);
+        jBeliminarRegistro.setEnabled(true);
+        
+    }//GEN-LAST:event_jThistorialMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscarPac;
@@ -427,6 +454,7 @@ public class RegistroConsultaPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTapellidoPac;
     private javax.swing.JTextField jTdniBuscar;
