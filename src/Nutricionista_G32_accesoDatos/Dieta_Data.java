@@ -3,6 +3,7 @@ package Nutricionista_G32_accesoDatos;
 import Nutricionista_G32_entidades.Comida;
 import Nutricionista_G32_entidades.Dieta;
 import Nutricionista_G32_entidades.Paciente;
+import Nutricionista_G32_entidades.Reporte;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -91,8 +92,8 @@ public class Dieta_Data {
     public boolean buscarDietaPorPaciente(int id_paciente) {
 
         String sql = "SELECT COUNT(*) AS CANTIDAD FROM dieta WHERE id_paciente = ? AND fecha_final > CURRENT_DATE(); ";
-                
-        boolean resultado = false ;
+
+        boolean resultado = false;
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -101,12 +102,12 @@ public class Dieta_Data {
 //            int cantidad = rs.getInt(0);
 //            JOptionPane.showMessageDialog(null, cantidad);
             if (rs.next()) {
-              int cantidad= rs.getInt(1);
-                if (cantidad > 0){
-                resultado = true;
-                }             
+                int cantidad = rs.getInt(1);
+                if (cantidad > 0) {
+                    resultado = true;
+                }
             }
-            
+
             ps.close();
 
         } catch (SQLException ex) {
@@ -218,4 +219,68 @@ public class Dieta_Data {
         }
         return dietas;
     }
+
+    public List<Reporte> reporteDietasFinalizadasSinExitoBP() {
+        List<Reporte> reportes = new ArrayList<>();
+
+        try {
+            String sql = " SELECT * FROM dieta, historial "
+                    + " WHERE dieta.id_paciente=historial.id_paciente "
+                    + " AND fecha_final < CURRENT_DATE() "
+                    + " AND dieta.peso_final < dieta.peso_inicial "
+                    + " AND historial.peso_registro >= dieta.peso_final ";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Reporte reporte = new Reporte();
+                Paciente paciente=new Paciente();
+                Paciente_Data pd= new Paciente_Data();
+                paciente=pd.buscarPacientePorId(rs.getInt("id_paciente"));
+                reporte.setPaciente(paciente);
+                reporte.setPesoObjetivo(rs.getDouble("peso_final"));
+                reporte.setUltimoPesoRegistro(rs.getDouble("peso_registro"));
+                reporte.setDiferencia(rs.getDouble("peso_final") - rs.getDouble("peso_registro"));
+                reportes.add(reporte);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA " + ex.getMessage());
+        }
+
+        return reportes;
+    }
+    
+    public List<Reporte> reporteDietasFinalizadasSinExitoSP() {
+        List<Reporte> reportes1 = new ArrayList<>();
+
+        try {
+            String sql = " SELECT * FROM dieta, historial "
+                    + " WHERE dieta.id_paciente=historial.id_paciente "
+                    + " AND fecha_final < CURRENT_DATE() "
+                    + " AND dieta.peso_final > dieta.peso_inicial "
+                    + " AND historial.peso_registro <= dieta.peso_final ";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Reporte reporte = new Reporte();
+                Paciente paciente=new Paciente();
+                Paciente_Data pd= new Paciente_Data();
+                paciente=pd.buscarPacientePorId(rs.getInt("id_paciente"));
+                reporte.setPaciente(paciente);
+                reporte.setPesoObjetivo(rs.getDouble("peso_final"));
+                reporte.setUltimoPesoRegistro(rs.getDouble("peso_registro"));
+                reporte.setDiferencia(rs.getDouble("peso_final") - rs.getDouble("peso_registro"));
+                reportes1.add(reporte);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA " + ex.getMessage());
+        }
+
+        return reportes1;
+    }
+
 }
+

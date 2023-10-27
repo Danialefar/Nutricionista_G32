@@ -45,6 +45,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuDieta = new javax.swing.JMenuItem();
         jMConsultaDieta = new javax.swing.JMenuItem();
+        jMenuReporte = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuDietaComida = new javax.swing.JMenuItem();
         jMConsDietaComida = new javax.swing.JMenuItem();
@@ -121,6 +122,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMConsultaDieta);
+
+        jMenuReporte.setText("Reporte Dieta Finalizada");
+        jMenuReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuReporteActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuReporte);
 
         jMenuBar1.add(jMenu3);
 
@@ -234,6 +243,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(lm);
     }//GEN-LAST:event_jMlistarComidasActionPerformed
 
+    private void jMenuReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuReporteActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ReporteDietaFinalizada rdf= new ReporteDietaFinalizada();
+        rdf.setVisible(true);
+        escritorio.add(rdf);
+        escritorio.moveToFront(rdf);
+    }//GEN-LAST:event_jMenuReporteActionPerformed
+
     /**,
      * @param args the command line arguments
      */
@@ -282,6 +300,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuDieta;
     private javax.swing.JMenuItem jMenuDietaComida;
     private javax.swing.JMenuItem jMenuPaciente;
+    private javax.swing.JMenuItem jMenuReporte;
     private javax.swing.JMenuItem jMlistarComidas;
     private javax.swing.JMenuItem jMregistroConsulta;
     // End of variables declaration//GEN-END:variables
