@@ -226,7 +226,7 @@ public class Dieta_Data {
         try {
             String sql = " SELECT * FROM dieta, historial "
                     + " WHERE dieta.id_paciente=historial.id_paciente "
-                    + " AND fecha_final < CURRENT_DATE() "
+                    + " AND fecha_final <= CURRENT_DATE() "
                     + " AND dieta.peso_final < dieta.peso_inicial "
                     + " AND historial.peso_registro >= dieta.peso_final ";
 
@@ -257,7 +257,7 @@ public class Dieta_Data {
         try {
             String sql = " SELECT * FROM dieta, historial "
                     + " WHERE dieta.id_paciente=historial.id_paciente "
-                    + " AND fecha_final < CURRENT_DATE() "
+                    + " AND fecha_final <= CURRENT_DATE() "
                     + " AND dieta.peso_final > dieta.peso_inicial "
                     + " AND historial.peso_registro <= dieta.peso_final ";
 

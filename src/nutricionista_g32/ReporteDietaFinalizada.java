@@ -16,8 +16,8 @@ public class ReporteDietaFinalizada extends javax.swing.JInternalFrame {
 
     public ReporteDietaFinalizada() {
         initComponents();
-        modelo = (DefaultTableModel) jTablaReporte.getModel();
-        model = (DefaultTableModel) jTablaReporte.getModel();
+        modelo = (DefaultTableModel) jTablaReporteBP.getModel();
+        model = (DefaultTableModel) jTablaReporteSP.getModel();
 
         Dieta_Data dD = new Dieta_Data();
         borrarFilas();
@@ -44,7 +44,7 @@ public class ReporteDietaFinalizada extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTablaReporte = new javax.swing.JTable();
+        jTablaReporteBP = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablaReporteSP = new javax.swing.JTable();
@@ -53,7 +53,7 @@ public class ReporteDietaFinalizada extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("REPORTE DIETAS FINALIZADAS NO EXITOSAS");
 
-        jTablaReporte.setModel(new javax.swing.table.DefaultTableModel(
+        jTablaReporteBP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,11 +72,11 @@ public class ReporteDietaFinalizada extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTablaReporte);
-        if (jTablaReporte.getColumnModel().getColumnCount() > 0) {
-            jTablaReporte.getColumnModel().getColumn(0).setMinWidth(350);
-            jTablaReporte.getColumnModel().getColumn(0).setPreferredWidth(350);
-            jTablaReporte.getColumnModel().getColumn(0).setMaxWidth(350);
+        jScrollPane1.setViewportView(jTablaReporteBP);
+        if (jTablaReporteBP.getColumnModel().getColumnCount() > 0) {
+            jTablaReporteBP.getColumnModel().getColumn(0).setMinWidth(350);
+            jTablaReporteBP.getColumnModel().getColumn(0).setPreferredWidth(350);
+            jTablaReporteBP.getColumnModel().getColumn(0).setMaxWidth(350);
         }
 
         jLabel1.setText("Listado de Dietas para Bajar de Peso");
@@ -152,12 +152,12 @@ public class ReporteDietaFinalizada extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTablaReporte;
+    private javax.swing.JTable jTablaReporteBP;
     private javax.swing.JTable jTablaReporteSP;
     // End of variables declaration//GEN-END:variables
 
     private void borrarFilas() {
-        int f = jTablaReporte.getRowCount() - 1;
+        int f = jTablaReporteBP.getRowCount() - 1;
         for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
